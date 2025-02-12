@@ -1,5 +1,4 @@
 <h1 style="text-align: center;">LAB2</h1>
-## Working Intructions
 
 ### Useful Links
 > [Atlassian](https://ktulab2.atlassian.net/jira/)
