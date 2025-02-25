@@ -8,5 +8,3 @@
 > [GitHub Dekstop](https://desktop.github.com)
 
 > [Parabol](https://action.parabol.co/team/EfATaR8wJb)
-
-
