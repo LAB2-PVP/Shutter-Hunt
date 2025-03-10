@@ -1,0 +1,2 @@
+Čia dar reiktų idėti sliders po music ir po sound effects,
+bet aš galvoju gal čia pačiam godot yra šias.
