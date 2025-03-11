@@ -1,0 +1,58 @@
+[gd_scene load_steps=6 format=3 uid="uid://fru407q71w1r"]
+
+[ext_resource type="Texture2D" uid="uid://b2am0s5eoo88n" path="res://GameUI_V1/maimenu/mainmenuBackgrond.png" id="1_u12ht"]
+[ext_resource type="Script" path="res://GameUI_V1/main_menu.gd" id="1_ydmcp"]
+[ext_resource type="Texture2D" uid="uid://c77ricwu62uu1" path="res://GameUI_V1/maimenu/startgameButton.png" id="2_me2h4"]
+[ext_resource type="Texture2D" uid="uid://pfej6kmc740v" path="res://GameUI_V1/maimenu/settingsButton.png" id="3_oekoe"]
+[ext_resource type="Texture2D" uid="uid://dumu1io0ewdhq" path="res://GameUI_V1/maimenu/quitgameButton.png" id="4_ti1rm"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ydmcp")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1155.0
+offset_bottom = 652.0
+texture = ExtResource("1_u12ht")
+expand_mode = 1
+
+[node name="StartGame" type="TextureButton" parent="Background"]
+layout_mode = 0
+offset_left = 162.0
+offset_top = 265.0
+offset_right = 401.0
+offset_bottom = 342.0
+action_mode = 0
+texture_normal = ExtResource("2_me2h4")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Settings" type="TextureButton" parent="Background"]
+layout_mode = 0
+offset_left = 218.0
+offset_top = 345.0
+offset_right = 349.0
+offset_bottom = 397.0
+texture_normal = ExtResource("3_oekoe")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="QuitGame" type="TextureButton" parent="Background"]
+layout_mode = 0
+offset_left = 188.0
+offset_top = 393.0
+offset_right = 385.0
+offset_bottom = 457.0
+texture_normal = ExtResource("4_ti1rm")
+ignore_texture_size = true
+stretch_mode = 0
+
+[connection signal="pressed" from="Background/StartGame" to="." method="_on_start_game_pressed"]
+[connection signal="pressed" from="Background/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="Background/QuitGame" to="." method="_on_quit_game_pressed"]

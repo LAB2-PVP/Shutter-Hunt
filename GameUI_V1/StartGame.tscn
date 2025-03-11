@@ -1,0 +1,92 @@
+[gd_scene load_steps=6 format=3 uid="uid://sw356tyxw31g"]
+
+[ext_resource type="Texture2D" uid="uid://bv4mtfhyhc3wu" path="res://GameUI_V1/startgame/assets/background.png" id="1_0w85a"]
+[ext_resource type="Script" path="res://GameUI_V1/start_game.gd" id="1_e46yl"]
+[ext_resource type="Texture2D" uid="uid://d2q5x6m1r0v2l" path="res://GameUI_V1/startgame/backButton.png" id="2_3jyxq"]
+[ext_resource type="Texture2D" uid="uid://c7t4lo7wfn8es" path="res://GameUI_V1/startgame/assets/polaroid.png" id="3_asn60"]
+[ext_resource type="Texture2D" uid="uid://j5d835s5iwhl" path="res://GameUI_V1/startgame/emptygameButton.png" id="4_sa3fv"]
+
+[node name="StartGame" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_e46yl")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -23.0
+offset_top = -17.0
+offset_right = 1170.0
+offset_bottom = 667.0
+texture = ExtResource("1_0w85a")
+expand_mode = 1
+
+[node name="BackButton" type="TextureButton" parent="Background"]
+layout_mode = 0
+offset_left = 36.0
+offset_top = 33.0
+offset_right = 123.0
+offset_bottom = 112.0
+texture_normal = ExtResource("2_3jyxq")
+
+[node name="EmptyGame1" type="TextureButton" parent="Background"]
+offset_left = 768.0
+offset_top = 123.0
+offset_right = 1105.0
+offset_bottom = 551.0
+texture_normal = ExtResource("3_asn60")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="Background/EmptyGame1"]
+layout_mode = 0
+offset_left = 58.0
+offset_top = 304.0
+offset_right = 295.0
+offset_bottom = 357.0
+texture = ExtResource("4_sa3fv")
+expand_mode = 1
+
+[node name="EmptyGame2" type="TextureButton" parent="Background"]
+offset_left = 91.0
+offset_top = 125.0
+offset_right = 428.0
+offset_bottom = 553.0
+texture_normal = ExtResource("3_asn60")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="Background/EmptyGame2"]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 306.0
+offset_right = 286.0
+offset_bottom = 360.0
+texture = ExtResource("4_sa3fv")
+expand_mode = 1
+
+[node name="EmptyGame3" type="TextureButton" parent="Background"]
+offset_left = 429.0
+offset_top = 123.0
+offset_right = 766.0
+offset_bottom = 551.0
+texture_normal = ExtResource("3_asn60")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="Background/EmptyGame3"]
+layout_mode = 0
+offset_left = 54.0
+offset_top = 306.0
+offset_right = 289.0
+offset_bottom = 361.0
+texture = ExtResource("4_sa3fv")
+expand_mode = 1
+
+[connection signal="pressed" from="Background/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="Background/EmptyGame1" to="." method="_on_empty_game_1_pressed"]
+[connection signal="pressed" from="Background/EmptyGame2" to="." method="_on_empty_game_2_pressed"]
+[connection signal="pressed" from="Background/EmptyGame3" to="." method="_on_empty_game_3_pressed"]
