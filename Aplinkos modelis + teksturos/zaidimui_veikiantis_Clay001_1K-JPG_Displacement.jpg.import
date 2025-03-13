@@ -1,0 +1,38 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://4l4abimq4w7l"
+path.s3tc="res://.godot/imported/zaidimui_veikiantis_Clay001_1K-JPG_Displacement.jpg-28f5e1892a66a7199354231d4049daa8.s3tc.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "d86558ee85e16ed501e1d403e2900161"
+}
+
+[deps]
+
+source_file="res://Aplinkos modelis + teksturos/zaidimui_veikiantis_Clay001_1K-JPG_Displacement.jpg"
+dest_files=["res://.godot/imported/zaidimui_veikiantis_Clay001_1K-JPG_Displacement.jpg-28f5e1892a66a7199354231d4049daa8.s3tc.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=1
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=1
+roughness/src_normal="res://Aplinkos modelis + teksturos/zaidimui_veikiantis_Clay001_1K-JPG_Displacement.jpg"
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0
