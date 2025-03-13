@@ -18,6 +18,7 @@ grow_vertical = 2
 script = ExtResource("1_wtykt")
 
 [node name="Background" type="TextureRect" parent="."]
+layout_mode = 0
 offset_left = -23.0
 offset_top = -17.0
 offset_right = 1170.0
@@ -66,6 +67,7 @@ scrollable = false
 [node name="SFXcontrol" type="VSlider" parent="Background/Paper"]
 modulate = Color(0.823529, 0.54902, 0.352941, 1)
 z_index = 40
+layout_mode = 0
 offset_left = 309.0
 offset_top = 215.0
 offset_right = 485.0

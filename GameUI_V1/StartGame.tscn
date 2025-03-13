@@ -33,6 +33,7 @@ offset_bottom = 112.0
 texture_normal = ExtResource("2_3jyxq")
 
 [node name="EmptyGame1" type="TextureButton" parent="Background"]
+layout_mode = 0
 offset_left = 768.0
 offset_top = 123.0
 offset_right = 1105.0
@@ -51,6 +52,7 @@ texture = ExtResource("4_sa3fv")
 expand_mode = 1
 
 [node name="EmptyGame2" type="TextureButton" parent="Background"]
+layout_mode = 0
 offset_left = 91.0
 offset_top = 125.0
 offset_right = 428.0
@@ -69,6 +71,7 @@ texture = ExtResource("4_sa3fv")
 expand_mode = 1
 
 [node name="EmptyGame3" type="TextureButton" parent="Background"]
+layout_mode = 0
 offset_left = 429.0
 offset_top = 123.0
 offset_right = 766.0
