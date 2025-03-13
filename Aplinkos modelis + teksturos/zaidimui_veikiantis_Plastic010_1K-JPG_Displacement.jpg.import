@@ -1,0 +1,38 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://c4sx28flxpqoj"
+path.s3tc="res://.godot/imported/zaidimui_veikiantis_Plastic010_1K-JPG_Displacement.jpg-db4f52ceb277f62900e25d6557dd1dbd.s3tc.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "939297406ffe6d33906df543e4bd6c4a"
+}
+
+[deps]
+
+source_file="res://Aplinkos modelis + teksturos/zaidimui_veikiantis_Plastic010_1K-JPG_Displacement.jpg"
+dest_files=["res://.godot/imported/zaidimui_veikiantis_Plastic010_1K-JPG_Displacement.jpg-db4f52ceb277f62900e25d6557dd1dbd.s3tc.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=1
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=1
+roughness/src_normal="res://Aplinkos modelis + teksturos/zaidimui_veikiantis_Plastic010_1K-JPG_Displacement.jpg"
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0

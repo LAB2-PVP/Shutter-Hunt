@@ -1,9 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://2b5124mgtfbh"]
+[gd_scene load_steps=12 format=3 uid="uid://2b5124mgtfbh"]
 
 [ext_resource type="PackedScene" uid="uid://kino6p4np0mg" path="res://player.tscn" id="1_dn55a"]
 [ext_resource type="Texture2D" uid="uid://8dnosx46srxs" path="res://Aplinkos modelis + teksturos/Aplinkos teksturos/4K-brick_wall_12_baseColor.jpg" id="2_5ntof"]
+[ext_resource type="PackedScene" uid="uid://dfhvl2h8nh40s" path="res://Modeliai (Blender failai)/playerModel_v1.blend" id="2_gbcuc"]
 [ext_resource type="Texture2D" uid="uid://laxcp1d1qcj5" path="res://Aplinkos modelis + teksturos/Aplinkos teksturos/Clay001_1K-JPG_Color.jpg" id="3_cilp3"]
 [ext_resource type="PackedScene" uid="uid://cbw3lj1otadvs" path="res://interaction/cube.tscn" id="4_cgttp"]
+[ext_resource type="PackedScene" uid="uid://bo5eae7muqyo0" path="res://map.tscn" id="5_eai6d"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2ypb3"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -32,9 +34,15 @@ environment = SubResource("Environment_s31fi")
 [node name="Entities" type="Node3D" parent="."]
 
 [node name="Player" parent="Entities" instance=ExtResource("1_dn55a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.12788, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 296.592, 66.1773, -14.7332)
+
+[node name="playerModel_v1" parent="Entities" instance=ExtResource("2_gbcuc")]
+transform = Transform3D(-2, 0, -1.74846e-07, 0, 2, 0, 1.74846e-07, 0, -2, 297.985, 63.464, 2.40017)
 
 [node name="map" type="Node3D" parent="."]
+
+[node name="zaidimui_veikiantis" parent="map" instance=ExtResource("5_eai6d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 302.163, 63.5511, -1.33559)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="map"]
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
@@ -52,5 +60,5 @@ use_collision = true
 size = Vector3(100, 1, 100)
 
 [node name="cube" parent="map" instance=ExtResource("4_cgttp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0114911, 2.6041, 6.18881)
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 298.713, 65.3524, 7.12179)
 prompt_message = "the all migthy cube"

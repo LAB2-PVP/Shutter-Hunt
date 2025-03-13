@@ -1,0 +1,38 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://cicf2uwke8fhi"
+path.s3tc="res://.godot/imported/zaidimui_veikiantis_Bake_blue_color.png-72c77b770a445caecabf0f42777c6613.s3tc.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "608d3af8cafc0e4697fb376e9e6e3cc1"
+}
+
+[deps]
+
+source_file="res://Aplinkos modelis + teksturos/zaidimui_veikiantis_Bake_blue_color.png"
+dest_files=["res://.godot/imported/zaidimui_veikiantis_Bake_blue_color.png-72c77b770a445caecabf0f42777c6613.s3tc.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=0
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=0
+roughness/src_normal=""
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0
