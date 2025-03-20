@@ -1,11 +1,11 @@
 [gd_scene load_steps=12 format=3 uid="uid://2b5124mgtfbh"]
 
-[ext_resource type="PackedScene" uid="uid://kino6p4np0mg" path="res://player.tscn" id="1_dn55a"]
-[ext_resource type="Texture2D" uid="uid://8dnosx46srxs" path="res://Aplinkos modelis + teksturos/Aplinkos teksturos/4K-brick_wall_12_baseColor.jpg" id="2_5ntof"]
-[ext_resource type="PackedScene" uid="uid://dfhvl2h8nh40s" path="res://Modeliai (Blender failai)/playerModel_v1.blend" id="2_gbcuc"]
-[ext_resource type="Texture2D" uid="uid://laxcp1d1qcj5" path="res://Aplinkos modelis + teksturos/Aplinkos teksturos/Clay001_1K-JPG_Color.jpg" id="3_cilp3"]
-[ext_resource type="PackedScene" uid="uid://cbw3lj1otadvs" path="res://interaction/camera.tscn" id="4_cgttp"]
-[ext_resource type="PackedScene" uid="uid://bo5eae7muqyo0" path="res://map.tscn" id="5_eai6d"]
+[ext_resource type="PackedScene" uid="uid://kino6p4np0mg" path="res://player/player.tscn" id="1_piw1b"]
+[ext_resource type="PackedScene" uid="uid://dfhvl2h8nh40s" path="res://Modeliai (Blender failai)/playerModel_v1.blend" id="2_g14nr"]
+[ext_resource type="PackedScene" uid="uid://bo5eae7muqyo0" path="res://map.tscn" id="3_esqeb"]
+[ext_resource type="Texture2D" uid="uid://8dnosx46srxs" path="res://Aplinkos modelis + teksturos/Aplinkos teksturos/4K-brick_wall_12_baseColor.jpg" id="4_4mwvw"]
+[ext_resource type="Texture2D" uid="uid://laxcp1d1qcj5" path="res://Aplinkos modelis + teksturos/Aplinkos teksturos/Clay001_1K-JPG_Color.jpg" id="5_cx8kr"]
+[ext_resource type="PackedScene" uid="uid://cbw3lj1otadvs" path="res://interaction/camera.tscn" id="6_586kb"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2ypb3"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -21,10 +21,10 @@ tonemap_mode = 2
 glow_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hwdk4"]
-albedo_texture = ExtResource("2_5ntof")
+albedo_texture = ExtResource("4_4mwvw")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gx3kb"]
-albedo_texture = ExtResource("3_cilp3")
+albedo_texture = ExtResource("5_cx8kr")
 
 [node name="world" type="Node3D"]
 
@@ -33,15 +33,15 @@ environment = SubResource("Environment_s31fi")
 
 [node name="Entities" type="Node3D" parent="."]
 
-[node name="Player" parent="Entities" instance=ExtResource("1_dn55a")]
+[node name="Player" parent="Entities" instance=ExtResource("1_piw1b")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 296.592, 66.1773, -14.7332)
 
-[node name="playerModel_v1" parent="Entities" instance=ExtResource("2_gbcuc")]
+[node name="playerModel_v1" parent="Entities" instance=ExtResource("2_g14nr")]
 transform = Transform3D(-2, 0, -1.74846e-07, 0, 2, 0, 1.74846e-07, 0, -2, 297.985, 63.464, 2.40017)
 
 [node name="map" type="Node3D" parent="."]
 
-[node name="zaidimui_veikiantis" parent="map" instance=ExtResource("5_eai6d")]
+[node name="zaidimui_veikiantis" parent="map" instance=ExtResource("3_esqeb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 302.163, 63.5511, -1.33559)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="map"]
@@ -59,7 +59,7 @@ material_override = SubResource("StandardMaterial3D_gx3kb")
 use_collision = true
 size = Vector3(100, 1, 100)
 
-[node name="camera" parent="map" instance=ExtResource("4_cgttp")]
+[node name="camera" parent="map" instance=ExtResource("6_586kb")]
 transform = Transform3D(-0.22192, 0, 0.332793, 0, 0.4, 0, -0.332793, 0, -0.22192, 298.478, 65.2524, 7.12179)
 title_message = "Camera"
 action_message = "press [E]  to pick up"
