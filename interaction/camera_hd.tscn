@@ -1,8 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://c5ux8bk8vrjev"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_6kd18"]
+[ext_resource type="ArrayMesh" uid="uid://fak68h7jfxt7" path="res://Assets/Polaroid.obj" id="1_x78ug"]
 
 [node name="StaticBody3D" type="StaticBody3D"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("BoxMesh_6kd18")
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+mesh = ExtResource("1_x78ug")

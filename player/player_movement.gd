@@ -10,10 +10,13 @@ extends CharacterBody3D
 @export var sensitivity = 0.5
 @export var min_angle = -80
 @export var max_angle = 80
+@export var inv: Inv
 
 @onready var head = $head
 @onready var collision_shape = $CollisionShape3D
 @onready var top_cast = $TopCast
+
+
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var look_rot : Vector2
