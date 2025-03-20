@@ -1,6 +1,7 @@
 extends RayCast3D
 
 @onready var prompt = $Prompt
+@onready var prompt2 = $Prompt2
 @onready var hand = $"../hand"
 @onready var photoCamera = preload("res://interaction/camera.tscn")
 @onready var heldCamera = preload("res://interaction/camera_hd.tscn")
@@ -11,13 +12,15 @@ var cameraToSpawn
 func _physics_process(_delta):
 	
 	prompt.text = ""
+	prompt2.text = ""
 	
 	if is_colliding():
 		
 		var collider = get_collider()
 		
 		if collider is Interactable:
-			prompt.text = collider.prompt_message
+			prompt.text = collider.title_message
+			prompt2.text = collider.action_message
 			
 			cameraToSpawn = heldCamera.instantiate()
 			

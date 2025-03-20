@@ -61,4 +61,5 @@ size = Vector3(100, 1, 100)
 
 [node name="cube" parent="map" instance=ExtResource("4_cgttp")]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 298.713, 65.3524, 7.12179)
-prompt_message = "the all migthy cube"
+title_message = "Camera"
+action_message = "press [E]  to pick up"
