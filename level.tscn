@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://8dnosx46srxs" path="res://Aplinkos modelis + teksturos/Aplinkos teksturos/4K-brick_wall_12_baseColor.jpg" id="2_5ntof"]
 [ext_resource type="PackedScene" uid="uid://dfhvl2h8nh40s" path="res://Modeliai (Blender failai)/playerModel_v1.blend" id="2_gbcuc"]
 [ext_resource type="Texture2D" uid="uid://laxcp1d1qcj5" path="res://Aplinkos modelis + teksturos/Aplinkos teksturos/Clay001_1K-JPG_Color.jpg" id="3_cilp3"]
-[ext_resource type="PackedScene" uid="uid://cbw3lj1otadvs" path="res://interaction/cube.tscn" id="4_cgttp"]
+[ext_resource type="PackedScene" uid="uid://cbw3lj1otadvs" path="res://interaction/camera.tscn" id="4_cgttp"]
 [ext_resource type="PackedScene" uid="uid://bo5eae7muqyo0" path="res://map.tscn" id="5_eai6d"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2ypb3"]
@@ -61,4 +61,5 @@ size = Vector3(100, 1, 100)
 
 [node name="cube" parent="map" instance=ExtResource("4_cgttp")]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 298.713, 65.3524, 7.12179)
-prompt_message = "the all migthy cube"
+title_message = "Camera"
+action_message = "press [E]  to pick up"
