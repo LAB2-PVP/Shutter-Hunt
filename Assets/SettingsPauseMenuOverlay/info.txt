@@ -1,0 +1,1 @@
+Tie juodi kvadračiukai, kurie matosi exampleSettings.png, tai ten turi būti slideriai.
