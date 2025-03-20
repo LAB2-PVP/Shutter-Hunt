@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://kino6p4np0mg"]
+[gd_scene load_steps=8 format=3 uid="uid://kino6p4np0mg"]
 
 [ext_resource type="Script" path="res://player/player_movement.gd" id="1_8oetg"]
 [ext_resource type="Resource" uid="uid://ck86vrb88xpxw" path="res://Inventory/playerInv.tres" id="2_372b8"]
 [ext_resource type="Texture2D" uid="uid://nqwf607mjw34" path="res://player/crosshair.png" id="2_dvm5e"]
 [ext_resource type="PackedScene" uid="uid://6lk1s4ivh3ob" path="res://interaction/interact_ray.tscn" id="2_onl7i"]
 [ext_resource type="PackedScene" uid="uid://dqlm1dtsu0epj" path="res://Inventory/inv_ui.tscn" id="4_l4dky"]
+[ext_resource type="PackedScene" uid="uid://ktg7rovg2xsd" path="res://pause_menu.tscn" id="6_vivvj"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_gjkwa"]
 
@@ -72,3 +73,7 @@ offset_bottom = -162.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(6, 6)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="UI"]
+
+[node name="PauseMenu" parent="UI/CanvasLayer" instance=ExtResource("6_vivvj")]

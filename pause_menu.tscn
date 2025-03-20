@@ -1,0 +1,73 @@
+[gd_scene load_steps=6 format=3 uid="uid://ktg7rovg2xsd"]
+
+[ext_resource type="Texture2D" uid="uid://b5v180u0e3hjt" path="res://Assets/PauseMenuOverlay/PauseMenu_Background.png" id="1_37niu"]
+[ext_resource type="Script" path="res://pause_menu.gd" id="1_pwjip"]
+[ext_resource type="Texture2D" uid="uid://d4k0xvul2j7k0" path="res://Assets/PauseMenuOverlay/resume_Button.png" id="2_xrcm1"]
+[ext_resource type="Texture2D" uid="uid://euc5s5ip6e7i" path="res://Assets/PauseMenuOverlay/settings_Button.png" id="3_dtclb"]
+[ext_resource type="Texture2D" uid="uid://ns86diyjihtw" path="res://Assets/PauseMenuOverlay/quitGame_Button.png" id="4_1gkti"]
+
+[node name="PauseMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pwjip")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -583.0
+offset_top = -331.0
+offset_right = 583.0
+offset_bottom = 333.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_37niu")
+expand_mode = 1
+
+[node name="Resume" type="TextureButton" parent="TextureRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -126.0
+offset_top = -150.0
+offset_right = 157.0
+offset_bottom = -78.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("2_xrcm1")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Settings" type="TextureButton" parent="TextureRect"]
+layout_mode = 0
+offset_left = 475.0
+offset_top = 290.0
+offset_right = 715.0
+offset_bottom = 370.0
+texture_normal = ExtResource("3_dtclb")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="QuitGame" type="TextureButton" parent="TextureRect"]
+layout_mode = 0
+offset_left = 473.0
+offset_top = 396.0
+offset_right = 700.0
+offset_bottom = 483.0
+texture_normal = ExtResource("4_1gkti")
+ignore_texture_size = true
+stretch_mode = 0
+
+[connection signal="pressed" from="TextureRect/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="TextureRect/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="TextureRect/QuitGame" to="." method="_on_quit_game_pressed"]
