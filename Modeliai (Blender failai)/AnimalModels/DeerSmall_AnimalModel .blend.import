@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dfhvl2h8nh40s"
-path="res://.godot/imported/playerModel_v1.blend-28021c66000196e54827e7838c19a365.scn"
+uid="uid://0abxx4ryk482"
+path="res://.godot/imported/DeerSmall_AnimalModel .blend-c852ff517a3b460f08350457b93050dc.scn"
 
 [deps]
 
-source_file="res://Modeliai (Blender failai)/playerModel_v1.blend"
-dest_files=["res://.godot/imported/playerModel_v1.blend-28021c66000196e54827e7838c19a365.scn"]
+source_file="res://Modeliai (Blender failai)/AnimalModels/DeerSmall_AnimalModel .blend"
+dest_files=["res://.godot/imported/DeerSmall_AnimalModel .blend-c852ff517a3b460f08350457b93050dc.scn"]
 
 [params]
 

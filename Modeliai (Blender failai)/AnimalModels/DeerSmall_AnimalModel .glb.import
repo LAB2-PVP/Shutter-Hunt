@@ -3,12 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://kmwheb5rerm0"
-valid=false
+uid="uid://dddq558ii7lls"
+path="res://.godot/imported/DeerSmall_AnimalModel .glb-a2cba1ac41e44767d9589b3d68a47671.scn"
 
 [deps]
 
-source_file="res://Aplinkos modelis + teksturos/zaidimui_2.gltf"
+source_file="res://Modeliai (Blender failai)/AnimalModels/DeerSmall_AnimalModel .glb"
+dest_files=["res://.godot/imported/DeerSmall_AnimalModel .glb-a2cba1ac41e44767d9589b3d68a47671.scn"]
 
 [params]
 

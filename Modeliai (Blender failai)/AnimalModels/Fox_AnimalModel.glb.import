@@ -3,12 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://kmwheb5rerm0"
-valid=false
+uid="uid://c5gqylqt22jtv"
+path="res://.godot/imported/Fox_AnimalModel.glb-edda80e3b47817c7e4615c7af1661403.scn"
 
 [deps]
 
-source_file="res://Aplinkos modelis + teksturos/zaidimui_2.gltf"
+source_file="res://Modeliai (Blender failai)/AnimalModels/Fox_AnimalModel.glb"
+dest_files=["res://.godot/imported/Fox_AnimalModel.glb-edda80e3b47817c7e4615c7af1661403.scn"]
 
 [params]
 
