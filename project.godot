@@ -24,6 +24,7 @@ buses/default_bus_layout=""
 [autoload]
 
 BackgroundAudio="*res://GameUI_V1/audio/Background_Audio.tscn"
+GlobalScene="*res://global_scene.gd"
 
 [dotnet]
 
