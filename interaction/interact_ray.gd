@@ -2,14 +2,17 @@ extends RayCast3D
 
 @onready var prompt = $Prompt
 @onready var prompt2 = $Prompt2
-@onready var hand = $"../hand"
+@onready var hand = $"../Camera3D/hand"
 @onready var photoCamera = preload("res://interaction/camera.tscn")
 @onready var heldCamera = preload("res://interaction/camera_hd.tscn")
 
 var cameraToDrop
 var cameraToSpawn
 
+
+
 func _physics_process(_delta):
+	
 	
 	prompt.text = ""
 	prompt2.text = ""
