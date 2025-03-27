@@ -22,11 +22,11 @@ func open():
 func close():
 	visible = false
 	is_paused = false
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if is_paused else Input.MOUSE_MODE_CAPTURED
 	
 
 func _on_resume_pressed() -> void:
-	visible = false
-	is_paused = false
+	close()
 
 
 func _on_settings_pressed() -> void:

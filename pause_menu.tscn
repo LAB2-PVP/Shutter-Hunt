@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://ktg7rovg2xsd"]
 
-[ext_resource type="Texture2D" uid="uid://b5v180u0e3hjt" path="res://Assets/PauseMenuOverlay/PauseMenu_Background.png" id="1_37niu"]
+[ext_resource type="Texture2D" uid="uid://cj6etlpma2s0" path="res://Assets/PauseMenuOverlay/PauseMenu_Background.png" id="1_37niu"]
 [ext_resource type="Script" path="res://pause_menu.gd" id="1_pwjip"]
-[ext_resource type="Texture2D" uid="uid://d4k0xvul2j7k0" path="res://Assets/PauseMenuOverlay/resume_Button.png" id="2_xrcm1"]
-[ext_resource type="Texture2D" uid="uid://euc5s5ip6e7i" path="res://Assets/PauseMenuOverlay/settings_Button.png" id="3_dtclb"]
-[ext_resource type="Texture2D" uid="uid://ns86diyjihtw" path="res://Assets/PauseMenuOverlay/quitGame_Button.png" id="4_1gkti"]
+[ext_resource type="Texture2D" uid="uid://dgloec258cjdw" path="res://Assets/PauseMenuOverlay/resume_Button.png" id="2_xrcm1"]
+[ext_resource type="Texture2D" uid="uid://cmvj3whkqr7u" path="res://Assets/PauseMenuOverlay/settings_Button.png" id="3_dtclb"]
+[ext_resource type="Texture2D" uid="uid://dm6xk2d84o7lg" path="res://Assets/PauseMenuOverlay/quitGame_Button.png" id="4_1gkti"]
 
 [node name="PauseMenu" type="Control"]
 layout_mode = 3

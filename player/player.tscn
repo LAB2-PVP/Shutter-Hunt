@@ -1,16 +1,16 @@
 [gd_scene load_steps=13 format=3 uid="uid://kino6p4np0mg"]
 
-[ext_resource type="Script" uid="uid://ccgdsf7jv2geq" path="res://player/player_movement.gd" id="1_8oetg"]
+[ext_resource type="Script" path="res://player/player_movement.gd" id="1_8oetg"]
 [ext_resource type="Resource" uid="uid://ck86vrb88xpxw" path="res://Inventory/playerInv.tres" id="2_372b8"]
 [ext_resource type="Texture2D" uid="uid://nqwf607mjw34" path="res://player/crosshair.png" id="2_dvm5e"]
 [ext_resource type="PackedScene" uid="uid://6lk1s4ivh3ob" path="res://interaction/interact_ray.tscn" id="2_onl7i"]
 [ext_resource type="PackedScene" uid="uid://dqlm1dtsu0epj" path="res://Inventory/inv_ui.tscn" id="4_l4dky"]
 [ext_resource type="PackedScene" uid="uid://ktg7rovg2xsd" path="res://pause_menu.tscn" id="6_vivvj"]
 [ext_resource type="PackedScene" uid="uid://bxvgvp7ghlt4i" path="res://take_photo.tscn" id="7_2x4w2"]
-[ext_resource type="Script" uid="uid://cayfx88wh6dne" path="res://player/state_machine.gd" id="8_rgyib"]
-[ext_resource type="Script" uid="uid://w7vf2gnbods3" path="res://player/idle_player_state.gd" id="9_hg6s5"]
-[ext_resource type="Script" uid="uid://buctilpp7eimi" path="res://player/walking_player_state.gd" id="10_8t03j"]
-[ext_resource type="Script" uid="uid://bl4le7sqic88" path="res://player/sprinting_player_state.gd" id="11_2ieo8"]
+[ext_resource type="Script" path="res://player/state_machine.gd" id="8_rgyib"]
+[ext_resource type="Script" path="res://player/idle_player_state.gd" id="9_hg6s5"]
+[ext_resource type="Script" path="res://player/walking_player_state.gd" id="10_8t03j"]
+[ext_resource type="Script" path="res://player/sprinting_player_state.gd" id="11_2ieo8"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_gjkwa"]
 

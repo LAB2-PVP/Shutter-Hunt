@@ -14,7 +14,7 @@ config/name="LAB2"
 run/main_scene="res://GameUI_V1/MainMenu.tscn"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="LAB2"
-config/features=PackedStringArray("4.4", "Forward Plus")
+config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://GameUI_V1/icon.svg"
 
 [audio]
