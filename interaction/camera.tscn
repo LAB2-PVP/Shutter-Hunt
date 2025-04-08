@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cbw3lj1otadvs"]
 
-[ext_resource type="Script" path="res://interaction/interactable.gd" id="1_bb2ly"]
+[ext_resource type="Script" uid="uid://djjeuvxtdljfo" path="res://interaction/interactable.gd" id="1_bb2ly"]
 [ext_resource type="ArrayMesh" uid="uid://fak68h7jfxt7" path="res://Assets/Polaroid.obj" id="2_k51ce"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_iknfo"]
