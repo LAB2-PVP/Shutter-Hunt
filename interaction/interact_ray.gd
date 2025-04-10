@@ -9,6 +9,8 @@ extends RayCast3D
 var cameraToDrop
 var cameraToSpawn
 
+signal camera_updated(new_camera)
+
 func _physics_process(_delta):
 	
 	prompt.text = ""
@@ -37,4 +39,5 @@ func _physics_process(_delta):
 					get_collider().queue_free()
 					hand.add_child(cameraToSpawn)
 					cameraToSpawn.rotation = hand.rotation
+					emit_signal("camera_updated", cameraToSpawn)
 					

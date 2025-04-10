@@ -1,6 +1,5 @@
 extends CharacterBody3D
 
-
 @export var speed_walking = 7.0
 @export var speed_sprint = 14.0
 @export var crouch_speed: float = 7.0
@@ -23,12 +22,16 @@ var _tilt_input : float
 var _player_rotation : Vector3
 var _camera_rotation : Vector3
 
+@onready var heldCamera = preload("res://interaction/camera_hd.tscn")
 @onready var head = $head
 @onready var collision_shape = $CollisionShape3D
 @onready var top_cast = $TopCast
 @onready var interact_ray = $head/InteractRay
+@onready var crosshair = $UI/TextureRect
+@onready var crosshairscene = $UI/CanvasLayer/TakePhoto
 
-
+# Track the instanced camera
+var held_camera_instance = null
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var look_rot : Vector2
@@ -51,16 +54,16 @@ func _update_camera(delta):
 	_tilt_input = 0.0
 	
 	global_transform.basis = Basis.from_euler(_player_rotation)
-	
-func _ready() -> void:
-	
+
+func _ready() -> void:    
 	GlobalScene.player = self
-	
 	stand_height = collision_shape.shape.height
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	# Connect to the InteractRay signal
+	interact_ray.connect("camera_updated", _on_camera_updated)
 
 func _physics_process(delta: float) -> void:
-	_speed == speed_walking
+	_speed = speed_walking
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	else:
@@ -85,22 +88,35 @@ func _physics_process(delta: float) -> void:
 		velocity.z = move_toward(velocity.z, 0.0, deccel)
 
 	move_and_slide()
-	
 	_update_camera(delta)
 
 func _input(event):
 	_mouse_input = event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED
 	if _mouse_input:
-		_rotation_input = -event.relative.x
-		_tilt_input = -event.relative.y
-	
+		_rotation_input = -event.relative.x * sensitivity
+		_tilt_input = -event.relative.y * sensitivity
+
+	# Toggle crosshair and camera visibility
+	if crosshairscene.is_visible_in_tree():
+		crosshair.visible = false
+		if held_camera_instance:
+			held_camera_instance.visible = false
+	else:
+		crosshair.visible = true
+		if held_camera_instance:
+			held_camera_instance.visible = true
+
+func _on_camera_updated(new_camera):
+	# Store the reference to the held camera
+	held_camera_instance = new_camera
+	print("Camera updated in Player: ", held_camera_instance.name)
+
 func crouch(delta : float, reverse = false):
 	var target_height : float = crouch_height if not reverse else stand_height
-	
 	collision_shape.shape.height = target_height
 	collision_shape.position.y = target_height * 0.5
 	head.position.y = lerp(head.position.y, target_height - 1, crouch_transition * delta)
-	
+
 func set_movement_speed(state: String):
 	match state:
 		"default":

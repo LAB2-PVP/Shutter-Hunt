@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://bxvgvp7ghlt4i"]
 
-[ext_resource type="Script" path="res://take_photo.gd" id="1_olvt6"]
+[ext_resource type="Script" uid="uid://dtypmxdjxu1bg" path="res://take_photo.gd" id="1_olvt6"]
 [ext_resource type="Texture2D" uid="uid://bsokcqp4vxm1n" path="res://Assets/CameraPolaroid.png" id="2_yjr68"]
 
 [sub_resource type="Animation" id="Animation_uq751"]
@@ -36,8 +36,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_nbjtd"]
 _data = {
-"RESET": SubResource("Animation_uq751"),
-"take_photo": SubResource("Animation_cex4a")
+&"RESET": SubResource("Animation_uq751"),
+&"take_photo": SubResource("Animation_cex4a")
 }
 
 [node name="TakePhoto" type="Control"]
@@ -69,7 +69,7 @@ expand_mode = 1
 [node name="AnimationPlayer" type="AnimationPlayer" parent="TextureRect"]
 root_node = NodePath("ColorRect")
 libraries = {
-"": SubResource("AnimationLibrary_nbjtd")
+&"": SubResource("AnimationLibrary_nbjtd")
 }
 
 [node name="ColorRect" type="ColorRect" parent="TextureRect/AnimationPlayer"]

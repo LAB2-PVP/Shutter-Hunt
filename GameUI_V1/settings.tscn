@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://7ktt0i41a7hc"]
 
 [ext_resource type="Texture2D" uid="uid://bv4mtfhyhc3wu" path="res://GameUI_V1/startgame/assets/background.png" id="1_k6xou"]
-[ext_resource type="Script" path="res://GameUI_V1/settings.gd" id="1_wtykt"]
+[ext_resource type="Script" uid="uid://d23eyl5xjnmjf" path="res://GameUI_V1/settings.gd" id="1_wtykt"]
 [ext_resource type="Texture2D" uid="uid://d2q5x6m1r0v2l" path="res://GameUI_V1/startgame/backButton.png" id="2_qfr5y"]
 [ext_resource type="Texture2D" uid="uid://ck8b7afo3yvxa" path="res://GameUI_V1/settings/assets/papersheet.png" id="3_shk85"]
 [ext_resource type="Texture2D" uid="uid://daf2h705ju4tt" path="res://GameUI_V1/settings/assets/settings.png" id="4_xkp8i"]
