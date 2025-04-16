@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://cu7ywd3cdmpww"]
+
+[ext_resource type="Material" uid="uid://beuuru0guvlpj" path="res://Map/water.tres" id="1_b0tcf"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_b0tcf"]
+material = ExtResource("1_b0tcf")
+size = Vector2(1, 1)
+subdivide_width = 200
+subdivide_depth = 200
+
+[node name="MeshInstance3D" type="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000660419, -0.00118792, -0.000848472)
+mesh = SubResource("PlaneMesh_b0tcf")

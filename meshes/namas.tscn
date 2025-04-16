@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://ctyllf0ggy2iv"]
+
+[ext_resource type="PackedScene" uid="uid://d3gi846ujvd73" path="res://Modeliai (Blender failai)/papildomi aplinkos/namas.glb" id="1_fjhss"]
+
+[node name="namas" instance=ExtResource("1_fjhss")]

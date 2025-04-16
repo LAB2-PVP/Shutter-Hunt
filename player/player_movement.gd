@@ -63,6 +63,9 @@ func _ready() -> void:
 	interact_ray.connect("camera_updated", _on_camera_updated)
 
 func _physics_process(delta: float) -> void:
+	
+	GlobalScene.debug.add_property("MovementSpeed", _speed, 1)
+	
 	_speed = speed_walking
 	if not is_on_floor():
 		velocity += get_gravity() * delta
