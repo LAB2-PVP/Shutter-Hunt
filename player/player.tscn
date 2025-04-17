@@ -10,9 +10,9 @@
 [ext_resource type="PackedScene" uid="uid://ktg7rovg2xsd" path="res://pause_menu.tscn" id="6_vivvj"]
 [ext_resource type="PackedScene" uid="uid://bxvgvp7ghlt4i" path="res://take_photo.tscn" id="7_2x4w2"]
 [ext_resource type="Script" uid="uid://cayfx88wh6dne" path="res://player/state_machine.gd" id="8_rgyib"]
-[ext_resource type="Script" uid="uid://w7vf2gnbods3" path="res://player/idle_player_state.gd" id="9_hg6s5"]
-[ext_resource type="Script" uid="uid://buctilpp7eimi" path="res://player/walking_player_state.gd" id="10_8t03j"]
-[ext_resource type="Script" uid="uid://bl4le7sqic88" path="res://player/sprinting_player_state.gd" id="11_2ieo8"]
+[ext_resource type="Script" uid="uid://w7vf2gnbods3" path="res://player/IdlePlayerState.gd" id="9_hg6s5"]
+[ext_resource type="Script" uid="uid://buctilpp7eimi" path="res://player/WalkingPlayerState.gd" id="10_8t03j"]
+[ext_resource type="Script" uid="uid://bl4le7sqic88" path="res://player/SprintingPlayerState.gd" id="11_2ieo8"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_gjkwa"]
 
@@ -60,10 +60,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -573.0
-offset_top = -323.0
-offset_right = -373.0
-offset_bottom = -283.0
+offset_left = -516.0
+offset_top = -270.0
+offset_right = -316.0
+offset_bottom = -230.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("4_yllr7")

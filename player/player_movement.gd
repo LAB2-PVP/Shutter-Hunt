@@ -1,7 +1,7 @@
 extends CharacterBody3D
 
-@export var speed_walking = 7.0
-@export var speed_sprint = 14.0
+@export var speed_default : float = 7.0
+@export var speed_sprint : float = 14.0
 @export var crouch_speed: float = 7.0
 @export var accel : float = 0.1
 @export var deccel : float = 0.5
@@ -30,7 +30,6 @@ var _camera_rotation : Vector3
 @onready var crosshair = $UI/TextureRect
 @onready var crosshairscene = $UI/CanvasLayer/TakePhoto
 
-# Track the instanced camera
 var held_camera_instance = null
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -61,12 +60,12 @@ func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	# Connect to the InteractRay signal
 	interact_ray.connect("camera_updated", _on_camera_updated)
+	_speed = speed_default
 
 func _physics_process(delta: float) -> void:
 	
-	GlobalScene.debug.add_property("MovementSpeed", _speed, 1)
+	GlobalScene.debug.add_property("MovementSpeed", _speed, 2)
 	
-	_speed = speed_walking
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	else:
@@ -119,10 +118,3 @@ func crouch(delta : float, reverse = false):
 	collision_shape.shape.height = target_height
 	collision_shape.position.y = target_height * 0.5
 	head.position.y = lerp(head.position.y, target_height - 1, crouch_transition * delta)
-
-func set_movement_speed(state: String):
-	match state:
-		"default":
-			_speed = speed_walking
-		"crouch":
-			_speed = crouch_speed

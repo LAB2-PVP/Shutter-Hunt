@@ -14,14 +14,15 @@ func _ready() -> void:
 		else:
 			push_warning("State machine contains incompatable child node")
 			
-	#CURRENT_STATE.enter()
-		
+	CURRENT_STATE.enter()
+	
 func _process(delta):
 	CURRENT_STATE.update(delta)
-	GlobalScene.debug.add_property("Current state: ", CURRENT_STATE.name, 2)
+	
 	
 func _physics_process(delta):
 	CURRENT_STATE.physics_update(delta)
+	GlobalScene.debug.add_property("Current state", CURRENT_STATE.name, 0)
 	
 func on_child_transition(new_state_name: StringName) -> void:
 	var new_state = states.get(new_state_name)
