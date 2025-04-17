@@ -1,37 +1,38 @@
-[gd_scene load_steps=6 format=3 uid="uid://bxvgvp7ghlt4i"]
+[gd_scene load_steps=8 format=3 uid="uid://bxvgvp7ghlt4i"]
 
 [ext_resource type="Script" uid="uid://dtypmxdjxu1bg" path="res://take_photo.gd" id="1_olvt6"]
 [ext_resource type="Texture2D" uid="uid://bsokcqp4vxm1n" path="res://Assets/CameraPolaroid.png" id="2_yjr68"]
+[ext_resource type="Shader" uid="uid://b2l7kqxt8ag2b" path="res://take_photo.gdshader" id="3_2dghh"]
 
 [sub_resource type="Animation" id="Animation_uq751"]
-length = 0.001
+length = 0.75
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:self_modulate")
+tracks/0/path = NodePath(".:material:shader_parameter/radius")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.367, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Color(0, 0, 0, 0)]
+"values": [1.414, 0.0, 1.414]
 }
 
 [sub_resource type="Animation" id="Animation_cex4a"]
 resource_name = "take_photo"
-length = 0.25
+length = 0.75
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:self_modulate")
+tracks/0/path = NodePath(".:material:shader_parameter/radius")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(-0.0333333, 0.133333, 0.233333),
+"times": PackedFloat32Array(0, 0.3, 0.75),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+"values": [1.414, 0.0, 1.414]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_nbjtd"]
@@ -39,6 +40,12 @@ _data = {
 &"RESET": SubResource("Animation_uq751"),
 &"take_photo": SubResource("Animation_cex4a")
 }
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_65wce"]
+shader = ExtResource("3_2dghh")
+shader_parameter/center = Vector2(0.5, 0.5)
+shader_parameter/radius = 1.414
+shader_parameter/resolution = Vector2(1, 1)
 
 [node name="TakePhoto" type="Control"]
 layout_mode = 3
@@ -50,17 +57,16 @@ grow_vertical = 2
 script = ExtResource("1_olvt6")
 
 [node name="TextureRect" type="TextureRect" parent="."]
-modulate = Color(1, 1, 1, 0.392157)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -860.0
-offset_top = -397.0
-offset_right = 860.0
-offset_bottom = 415.0
+offset_left = -858.0
+offset_top = -394.0
+offset_right = 862.0
+offset_bottom = 418.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_yjr68")
@@ -71,10 +77,28 @@ root_node = NodePath("ColorRect")
 libraries = {
 &"": SubResource("AnimationLibrary_nbjtd")
 }
+speed_scale = 0.9
 
 [node name="ColorRect" type="ColorRect" parent="TextureRect/AnimationPlayer"]
-modulate = Color(0, 0, 0, 1)
-self_modulate = Color(0, 0, 0, 0)
-offset_top = 3.0
-offset_right = 1158.0
-offset_bottom = 649.0
+self_modulate = Color(0, 0, 0, 0.2)
+material = SubResource("ShaderMaterial_65wce")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -292.0
+offset_top = -178.0
+offset_right = 287.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="PhotoViewport" type="SubViewport" parent="."]
+render_target_update_mode = 1
+
+[node name="PhotoCamera" type="Camera3D" parent="PhotoViewport"]

@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="LAB2"
-run/main_scene="uid://dek8vex3p6rfr"
+run/main_scene="uid://fru407q71w1r"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="LAB2"
 config/features=PackedStringArray("4.4", "Forward Plus")
