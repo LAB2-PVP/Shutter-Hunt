@@ -18,6 +18,7 @@ func _ready() -> void:
 		
 func _process(delta):
 	CURRENT_STATE.update(delta)
+	GlobalScene.debug.add_property("Current state: ", CURRENT_STATE.name, 2)
 	
 func _physics_process(delta):
 	CURRENT_STATE.physics_update(delta)
