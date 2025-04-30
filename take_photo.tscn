@@ -69,6 +69,7 @@ offset_right = 862.0
 offset_bottom = 418.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("2_yjr68")
 expand_mode = 1
 
@@ -102,3 +103,11 @@ color = Color(0, 0, 0, 1)
 render_target_update_mode = 1
 
 [node name="PhotoCamera" type="Camera3D" parent="PhotoViewport"]
+
+[node name="FocalLengthLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 311.0
+offset_top = 152.0
+offset_right = 536.0
+offset_bottom = 186.0
+theme_override_font_sizes/font_size = 24
