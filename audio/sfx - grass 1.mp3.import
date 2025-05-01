@@ -12,8 +12,8 @@ dest_files=["res://.godot/imported/sfx - grass 1.mp3-b54aa24145a466d48b658b35f20
 
 [params]
 
-loop=false
-loop_offset=0
-bpm=0
+loop=true
+loop_offset=0.0
+bpm=0.0
 beat_count=0
 bar_beats=4

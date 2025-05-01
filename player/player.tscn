@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://kino6p4np0mg"]
+[gd_scene load_steps=16 format=3 uid="uid://kino6p4np0mg"]
 
 [ext_resource type="Script" uid="uid://ccgdsf7jv2geq" path="res://player/player_movement.gd" id="1_8oetg"]
 [ext_resource type="Resource" uid="uid://ck86vrb88xpxw" path="res://Inventory/playerInv.tres" id="2_372b8"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://w7vf2gnbods3" path="res://player/IdlePlayerState.gd" id="9_hg6s5"]
 [ext_resource type="Script" uid="uid://buctilpp7eimi" path="res://player/WalkingPlayerState.gd" id="10_8t03j"]
 [ext_resource type="Script" uid="uid://bl4le7sqic88" path="res://player/SprintingPlayerState.gd" id="11_2ieo8"]
+[ext_resource type="AudioStream" uid="uid://buea81ss1cnid" path="res://audio/sfx - grass 1.mp3" id="13_kb6p2"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_gjkwa"]
 
@@ -124,5 +125,14 @@ script = ExtResource("9_hg6s5")
 [node name="WalkingPlayerState" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("10_8t03j")
 
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="PlayerStateMachine/WalkingPlayerState"]
+stream = ExtResource("13_kb6p2")
+volume_db = 25.0
+
 [node name="SprintingPlayerState" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("11_2ieo8")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="PlayerStateMachine/SprintingPlayerState"]
+stream = ExtResource("13_kb6p2")
+volume_db = 25.0
+pitch_scale = 2.0
