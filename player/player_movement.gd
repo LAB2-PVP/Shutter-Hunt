@@ -44,6 +44,22 @@ var default_fov: float = 37.86  # Corresponds to ~35mm (photo mode default)
 var non_photo_fov: float = 70.0  # Default FOV for non-photo mode (wider view)
 var sensor_height: float = 24.0  # Full-frame sensor height
 
+# ISO variables
+var iso: float = 1000.0  # Default ISO set to 1000 as requested
+var iso_step: float = 50.0  # Step size for ISO adjustment
+var min_iso: float = 100.0  # Minimum ISO (maps to exposure 0.5)
+var max_iso: float = 1600.0  # Maximum ISO (maps to exposure 2.5)
+
+# Store the original environment for non-photo mode
+var original_environment: Environment = null
+
+# Signal to notify TakePhoto script of ISO changes
+signal iso_updated(new_iso)
+
+# Convert ISO to exposure for camera adjustments
+func iso_to_exposure(iso_value: float) -> float:
+	return (iso_value - 100.0) / 750.0 + 0.5
+
 func _update_camera(delta):
 	_mouse_rotation.x += _tilt_input * delta
 	_mouse_rotation.x = clamp(_mouse_rotation.x, min_angle, max_angle)
@@ -70,13 +86,17 @@ func _ready() -> void:
 	interact_ray.connect("camera_updated", _on_camera_updated)
 	_speed = speed_default
 	
-	# Set the default FOV for non-photo mode
+	# Set the default FOV for non-photo mode and store the original environment
 	if CAMERA_CONTROLLER:
 		CAMERA_CONTROLLER.current = true
 		CAMERA_CONTROLLER.fov = non_photo_fov  # Use non-photo FOV at start
-		print("Camera controller set: ", CAMERA_CONTROLLER)
-		print("Initial FOV set to: ", CAMERA_CONTROLLER.fov)  # Debug print
-		# Update the focal length display initially (will be updated when entering photo mode)
+		# Store the original environment (could be null if none exists)
+		original_environment = CAMERA_CONTROLLER.environment
+		if original_environment and original_environment.adjustment_enabled:
+			print("Environment exposure (adjustment_brightness): ", original_environment.adjustment_brightness)
+		# ISO is set to 1000 as requested
+		print("Default ISO set to: ", iso)
+		# Update the focal length display initially
 		var initial_focal_length = calculate_focal_length(CAMERA_CONTROLLER.fov)
 		crosshairscene.update_focal_length(initial_focal_length)
 	else:
@@ -117,7 +137,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	_update_camera(delta)
 	
-	# Handle zoom only when in photo mode
+	# Handle zoom and ISO when in photo mode
 	if crosshairscene.is_visible_in_tree():
 		if Input.is_action_pressed("zoom_in"):
 			print("Zoom in key pressed")
@@ -125,6 +145,11 @@ func _physics_process(delta: float) -> void:
 		if Input.is_action_pressed("zoom_out"):
 			print("Zoom out key pressed")
 			zoom_camera(zoom_speed * delta)
+		# Add ISO controls only in photo mode
+		if Input.is_action_just_pressed("increase_exposure"):
+			adjust_iso(iso_step)
+		if Input.is_action_just_pressed("decrease_exposure"):
+			adjust_iso(-iso_step)
 
 func _input(event):
 	_mouse_input = event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED
@@ -168,7 +193,12 @@ func calculate_focal_length(fov: float) -> float:
 func _on_crosshairscene_visibility_changed():
 	if not crosshairscene.is_visible_in_tree() and CAMERA_CONTROLLER:
 		CAMERA_CONTROLLER.fov = non_photo_fov  # Reset to non-photo FOV when exiting photo mode
-		print("Reset FOV to: ", CAMERA_CONTROLLER.fov)
+		# Reset ISO to 1000 when exiting photo mode
+		iso = 1000.0
+		# Restore the original environment to remove any ISO adjustments
+		CAMERA_CONTROLLER.environment = original_environment
+		emit_signal("iso_updated", iso)  # Update TakePhoto script
+		print("Emitting iso_updated signal on visibility change: ", iso)
 		var focal_length = calculate_focal_length(CAMERA_CONTROLLER.fov)
 		crosshairscene.update_focal_length(focal_length)
 
@@ -181,3 +211,29 @@ func crouch(delta : float, reverse = false):
 	collision_shape.shape.height = target_height
 	collision_shape.position.y = target_height * 0.5
 	head.position.y = lerp(head.position.y, target_height - 1, crouch_transition * delta)
+
+# Function to adjust ISO
+func adjust_iso(change: float) -> void:
+	iso = clamp(iso + change, min_iso, max_iso)
+	apply_iso_to_camera()
+	# Emit signal to update TakePhoto script
+	emit_signal("iso_updated", iso)
+	print("Emitting iso_updated signal on adjust_iso: ", iso)
+
+# Function to apply ISO to the main camera
+func apply_iso_to_camera() -> void:
+	if CAMERA_CONTROLLER:
+		if crosshairscene.is_visible_in_tree():
+			# In photo mode, apply ISO adjustments
+			var exposure_value = iso_to_exposure(iso)
+			if CAMERA_CONTROLLER.environment:
+				CAMERA_CONTROLLER.environment.adjustment_enabled = true
+				CAMERA_CONTROLLER.environment.adjustment_brightness = exposure_value
+			else:
+				var env = Environment.new()
+				env.adjustment_enabled = true
+				env.adjustment_brightness = exposure_value
+				CAMERA_CONTROLLER.environment = env
+		else:
+			# In non-photo mode, restore the original environment
+			CAMERA_CONTROLLER.environment = original_environment
