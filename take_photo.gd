@@ -6,14 +6,22 @@ extends Control
 @onready var photo_viewport: SubViewport = $PhotoViewport
 @onready var photo_camera: Camera3D = $PhotoViewport/PhotoCamera
 @onready var focal_length_label: Label = $FocalLengthLabel
+@onready var exposure_label: Label = $ExposureLabel # Add a new Label node in the scene for exposure
 
 var is_open: bool = false
 var is_animating: bool = false
+
+# Exposure settings
+var exposure: float = 1.0  # Default exposure value (1.0 is neutral)
+var exposure_step: float = 0.1  # Step size for exposure adjustment
+var min_exposure: float = 0.5  # Minimum exposure to avoid complete darkness
+var max_exposure: float = 2.5  # Maximum exposure to avoid over-brightness
 
 func _ready() -> void:
 	blink.visible = false
 	overlay.visible = true
 	focal_length_label.visible = false
+	exposure_label.visible = false
 	
 	# Create screenshots directory if it doesn't exist
 	var dir: DirAccess = DirAccess.open("user://")
@@ -28,6 +36,9 @@ func _ready() -> void:
 	# Pass the viewport size to the shader for aspect ratio correction
 	var viewport_size: Vector2 = get_viewport().size
 	blink.material.set_shader_parameter("resolution", viewport_size)
+	
+	# Initialize exposure label
+	update_exposure_label()
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("open_camera_window"):
@@ -38,11 +49,19 @@ func _process(delta: float) -> void:
 	
 	if Input.is_action_just_pressed("Take_photo") and is_open:
 		take_photo_with_transition()
+	
+	# Exposure adjustments
+	if is_open:
+		if Input.is_action_just_pressed("increase_exposure"):
+			adjust_exposure(exposure_step)
+		if Input.is_action_just_pressed("decrease_exposure"):
+			adjust_exposure(-exposure_step)
 
 func open() -> void:
 	visible = true
 	is_open = true
 	focal_length_label.visible = true
+	exposure_label.visible = true
 	
 	# Set the default FOV when entering photo mode
 	var player: Node = GlobalScene.player
@@ -59,9 +78,27 @@ func close() -> void:
 	visible = false
 	is_open = false
 	focal_length_label.visible = false
+	exposure_label.visible = false
 
 func update_focal_length(focal_length: float) -> void:
 	focal_length_label.text = "Focal Length: %.1f mm" % focal_length
+
+func update_exposure_label() -> void:
+	exposure_label.text = "Exposure: %.1f" % exposure
+
+func adjust_exposure(change: float) -> void:
+	exposure = clamp(exposure + change, min_exposure, max_exposure)
+	update_exposure_label()
+	# Apply exposure to the photo camera's environment
+	if photo_camera.environment:
+		photo_camera.environment.adjustment_enabled = true
+		photo_camera.environment.adjustment_brightness = exposure
+	else:
+		var env = Environment.new()
+		env.adjustment_enabled = true
+		env.adjustment_brightness = exposure
+		photo_camera.environment = env
+	print("Exposure adjusted to: ", exposure)
 
 func take_photo_with_transition() -> void:
 	var player: Node = GlobalScene.player
@@ -84,6 +121,16 @@ func take_photo_with_transition() -> void:
 	photo_camera.far = player_camera.far
 	photo_camera.cull_mask = player_camera.cull_mask
 	
+	# Apply exposure settings to the photo camera
+	if photo_camera.environment:
+		photo_camera.environment.adjustment_enabled = true
+		photo_camera.environment.adjustment_brightness = exposure
+	else:
+		var env = Environment.new()
+		env.adjustment_enabled = true
+		env.adjustment_brightness = exposure
+		photo_camera.environment = env
+
 	photo_viewport.render_target_update_mode = SubViewport.UPDATE_ONCE
 	await RenderingServer.frame_post_draw
 	var sshot: Image = photo_viewport.get_texture().get_image()
