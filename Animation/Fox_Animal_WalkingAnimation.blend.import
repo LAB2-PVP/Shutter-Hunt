@@ -4,11 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://p5uatsdyqphm"
-valid=false
+path="res://.godot/imported/Fox_Animal_WalkingAnimation.blend-f0b771b082b87ce77d84e8fbf2f3aa58.scn"
 
 [deps]
 
 source_file="res://Animation/Fox_Animal_WalkingAnimation.blend"
+dest_files=["res://.godot/imported/Fox_Animal_WalkingAnimation.blend-f0b771b082b87ce77d84e8fbf2f3aa58.scn"]
 
 [params]
 
