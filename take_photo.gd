@@ -37,29 +37,32 @@ func _ready() -> void:
 	try_connect_to_player()
 
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("open_camera_window"):
-		if is_open:
-			close()
-		else:
-			open()
+	if GlobalScene.player.hasCamera != false:
+		if Input.is_action_just_pressed("open_camera_window"):
+			if is_open:
+				close()
+			else:
+				open()
 	
-	if Input.is_action_just_pressed("Take_photo") and is_open:
-		take_photo_with_transition()
+		if Input.is_action_just_pressed("Take_photo") and is_open:
+			take_photo_with_transition()
+	else:
+		pass
+	
 
 func try_connect_to_player() -> void:
-	var player: Node = GlobalScene.player
-	if player and not is_connected_to_player:
-		var connection_result = player.connect("iso_updated", _on_iso_updated)
+	if GlobalScene.player and not is_connected_to_player:
+		var connection_result = GlobalScene.player.connect("iso_updated", _on_iso_updated)
 		if connection_result != OK:
 			print("Error: Failed to connect iso_updated signal: ", connection_result)
 		else:
 			is_connected_to_player = true
 			print("Successfully connected to player's iso_updated signal")
 			# Sync ISO immediately after connecting
-			iso = player.iso
+			iso = GlobalScene.player.iso
 			update_iso_label()
 	else:
-		if not player:
+		if not GlobalScene.player:
 			print("Player node not found in GlobalScene during try_connect_to_player")
 		elif is_connected_to_player:
 			print("Already connected to player's iso_updated signal")
@@ -121,12 +124,11 @@ func _on_iso_updated(new_iso: float) -> void:
 	print("ISO updated signal received in TakePhoto: ", iso)
 
 func take_photo_with_transition() -> void:
-	var player: Node = GlobalScene.player
-	if not player or not player.has_node("head/Camera3D"):
+	if not GlobalScene.player or not GlobalScene.player.has_node("head/Camera3D"):
 		print("Error: Could not find Player or Camera3D node")
 		return
 	
-	var player_camera: Camera3D = player.get_node("head/Camera3D")
+	var player_camera: Camera3D = GlobalScene.player.get_node("head/Camera3D")
 	if not player_camera:
 		print("Error: Could not find player's Camera3D")
 		return
