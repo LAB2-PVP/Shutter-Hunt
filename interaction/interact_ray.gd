@@ -40,4 +40,5 @@ func _physics_process(_delta):
 					hand.add_child(cameraToSpawn)
 					cameraToSpawn.rotation = hand.rotation
 					emit_signal("camera_updated", cameraToSpawn)
+					GlobalScene.player.hasCamera = true
 					

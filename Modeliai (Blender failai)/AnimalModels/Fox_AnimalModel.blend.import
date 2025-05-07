@@ -4,11 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://co8pc2dsemphp"
-valid=false
+path="res://.godot/imported/Fox_AnimalModel.blend-7e7902ce3f3f1d113db89108996ec63b.scn"
 
 [deps]
 
 source_file="res://Modeliai (Blender failai)/AnimalModels/Fox_AnimalModel.blend"
+dest_files=["res://.godot/imported/Fox_AnimalModel.blend-7e7902ce3f3f1d113db89108996ec63b.scn"]
 
 [params]
 

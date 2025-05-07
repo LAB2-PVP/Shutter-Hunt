@@ -13,6 +13,7 @@ extends CharacterBody3D
 @export var max_angle := deg_to_rad(90.0)
 @export var CAMERA_CONTROLLER : Camera3D
 @export var inv: Inv
+@export var hasCamera: bool = false
 
 var _speed : float
 var _mouse_input : bool = false
@@ -110,6 +111,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	GlobalScene.debug.add_property("MovementSpeed", _speed, 2)
+	GlobalScene.debug.add_property("hasCamera", hasCamera, 2)
 	
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -150,6 +152,7 @@ func _physics_process(delta: float) -> void:
 			adjust_iso(iso_step)
 		if Input.is_action_just_pressed("decrease_exposure"):
 			adjust_iso(-iso_step)
+			
 
 func _input(event):
 	_mouse_input = event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED

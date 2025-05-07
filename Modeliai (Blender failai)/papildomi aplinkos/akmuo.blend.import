@@ -4,11 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://b42b3xm6jx5se"
-valid=false
+path="res://.godot/imported/akmuo.blend-921b9b214297b1028e4ccd4137258e4a.scn"
 
 [deps]
 
 source_file="res://Modeliai (Blender failai)/papildomi aplinkos/akmuo.blend"
+dest_files=["res://.godot/imported/akmuo.blend-921b9b214297b1028e4ccd4137258e4a.scn"]
 
 [params]
 
