@@ -15,7 +15,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_wtykt")
 
-[node name="Paper" type="TextureRect" parent="."]
+[node name="Background" type="TextureRect" parent="."]
 layout_mode = 0
 offset_left = 997.0
 offset_top = 39.0
@@ -25,7 +25,7 @@ rotation = 1.5708
 texture = ExtResource("3_shk85")
 expand_mode = 1
 
-[node name="settings" type="TextureRect" parent="Paper"]
+[node name="Settings label" type="TextureRect" parent="Background"]
 layout_mode = 0
 offset_left = 80.0
 offset_top = 553.0
@@ -35,7 +35,7 @@ rotation = -1.5708
 texture = ExtResource("4_xkp8i")
 expand_mode = 1
 
-[node name="MusicControl" type="VSlider" parent="Paper"]
+[node name="MusicControl" type="VSlider" parent="Background"]
 modulate = Color(0.823529, 0.54902, 0.352941, 1)
 z_index = 40
 layout_mode = 0
@@ -43,9 +43,11 @@ offset_left = 184.0
 offset_top = 214.0
 offset_right = 360.0
 offset_bottom = 617.0
+max_value = 1.0
+step = 0.001
 scrollable = false
 
-[node name="SFXcontrol" type="VSlider" parent="Paper"]
+[node name="SFXControl" type="VSlider" parent="Background"]
 modulate = Color(0.823529, 0.54902, 0.352941, 1)
 z_index = 40
 layout_mode = 0
@@ -53,9 +55,11 @@ offset_left = 309.0
 offset_top = 215.0
 offset_right = 485.0
 offset_bottom = 618.0
+max_value = 1.0
+step = 0.01
 scrollable = false
 
-[node name="SFX" type="TextureRect" parent="Paper"]
+[node name="SFX label" type="TextureRect" parent="Background"]
 layout_mode = 0
 offset_left = 324.0
 offset_top = 548.0
@@ -65,7 +69,7 @@ rotation = -1.5708
 texture = ExtResource("5_mt8ui")
 expand_mode = 1
 
-[node name="Music" type="TextureRect" parent="Paper"]
+[node name="Music label" type="TextureRect" parent="Background"]
 layout_mode = 0
 offset_left = 206.0
 offset_top = 496.0
@@ -74,3 +78,6 @@ offset_bottom = 536.0
 rotation = -1.5708
 texture = ExtResource("6_0a7sa")
 expand_mode = 1
+
+[connection signal="value_changed" from="Background/MusicControl" to="." method="_on_music_control_value_changed"]
+[connection signal="value_changed" from="Background/SFXControl" to="." method="_on_sfx_control_value_changed"]

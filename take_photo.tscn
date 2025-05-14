@@ -142,3 +142,4 @@ render_target_update_mode = 1
 
 [node name="ShutterSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_65wce")
+bus = &"SFX"
