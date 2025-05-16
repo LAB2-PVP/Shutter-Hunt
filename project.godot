@@ -25,10 +25,15 @@ buses/default_bus_layout=""
 
 GlobalScene="*res://global_scene.gd"
 BackgroundAudio="*res://audio/Background_Audio.tscn"
+BusLayout="*res://Bus_Layout.tres"
 
 [dotnet]
 
 project/assembly_name="LAB2"
+
+[global_group]
+
+pickable=""
 
 [input]
 

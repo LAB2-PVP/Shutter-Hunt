@@ -13,8 +13,8 @@ dest_files=["res://.godot/imported/Polaroidas.glb-201f0f38a68c1f1a05284ff534a609
 
 [params]
 
-nodes/root_type=""
-nodes/root_name=""
+nodes/root_type="RigidBody3D"
+nodes/root_name="polaroidas"
 nodes/apply_root_scale=true
 nodes/root_scale=1.0
 nodes/import_as_skeleton_bones=false

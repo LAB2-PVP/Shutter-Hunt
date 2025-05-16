@@ -3,18 +3,18 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://ccoidp4788lkj"
-path="res://.godot/imported/RyskinimoIndasApacia.glb-de65b826868a349dc3e56ba0fba84415.scn"
+uid="uid://daterobf0cnmg"
+path="res://.godot/imported/HOUSENEWBEBALDU.glb-3a92ed4668356096d2be526be896b87f.scn"
 
 [deps]
 
-source_file="res://Modeliai (Blender failai)/RyskinimasBlenderObjektai/RyskinimoIndasApacia.glb"
-dest_files=["res://.godot/imported/RyskinimoIndasApacia.glb-de65b826868a349dc3e56ba0fba84415.scn"]
+source_file="res://HouseModel/HOUSENEWBEBALDU.glb"
+dest_files=["res://.godot/imported/HOUSENEWBEBALDU.glb-3a92ed4668356096d2be526be896b87f.scn"]
 
 [params]
 
-nodes/root_type="RigidBody3D"
-nodes/root_name="RyskinimoIndas"
+nodes/root_type=""
+nodes/root_name=""
 nodes/apply_root_scale=true
 nodes/root_scale=1.0
 nodes/import_as_skeleton_bones=false
