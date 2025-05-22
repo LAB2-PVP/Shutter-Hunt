@@ -13,7 +13,7 @@ func _process(delta: float) -> void:
 
 func _on_body_entered(body: Node3D) -> void:
 	if body.is_in_group("player"):
-		get_node("../QuestMenu").show()
+		get_node("../QuestMenu").showQuests()
 
 
 func _on_body_exited(body: Node3D) -> void:

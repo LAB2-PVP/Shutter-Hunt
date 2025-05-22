@@ -2,17 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d0yeh5tuk4mjc"
-path.s3tc="res://.godot/imported/bottle 3.png-a526263d36c7de74a8547c175226eed3.s3tc.ctex"
+uid="uid://cgndc7opl3w44"
+path.s3tc="res://.godot/imported/Laikrodis_il_570xN.4772998435_d90t.webp-fd481ab4ac36ba6a921d576f3152aee6.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={
+"md5": "0d1f80798c05224096bd5c6b7e7f47e3"
+}
 
 [deps]
 
-source_file="res://Modeliai (Blender failai)/Buteliukai/textures/bottle 3.png"
-dest_files=["res://.godot/imported/bottle 3.png-a526263d36c7de74a8547c175226eed3.s3tc.ctex"]
+source_file="res://Modeliai (Blender failai)/Laikrodis/Laikrodis_il_570xN.4772998435_d90t.webp"
+dest_files=["res://.godot/imported/Laikrodis_il_570xN.4772998435_d90t.webp-fd481ab4ac36ba6a921d576f3152aee6.s3tc.ctex"]
 
 [params]
 

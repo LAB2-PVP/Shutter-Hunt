@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://d1suphh58soy"
-path="res://.godot/imported/meska.blend-98a0777ce8c8323cd4a9a37574b46241.scn"
+uid="uid://c2lokqmfxefmi"
+path="res://.godot/imported/Laikrodis.blend-e17174c192f6fbecdd5f07ea1c01c663.scn"
 
 [deps]
 
-source_file="res://Modeliai (Blender failai)/AnimalModels/meska.blend"
-dest_files=["res://.godot/imported/meska.blend-98a0777ce8c8323cd4a9a37574b46241.scn"]
+source_file="res://Modeliai (Blender failai)/Laikrodis/Laikrodis.blend"
+dest_files=["res://.godot/imported/Laikrodis.blend-e17174c192f6fbecdd5f07ea1c01c663.scn"]
 
 [params]
 
