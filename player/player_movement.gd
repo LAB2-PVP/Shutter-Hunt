@@ -152,7 +152,8 @@ func _physics_process(delta: float) -> void:
 			adjust_iso(iso_step)
 		if Input.is_action_just_pressed("decrease_exposure"):
 			adjust_iso(-iso_step)
-			
+	if Input.is_action_pressed("Ryskinti"):
+		get_tree().change_scene_to_file("res://ryskinimas.tscn")
 
 func _input(event):
 	_mouse_input = event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED

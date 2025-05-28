@@ -43,12 +43,23 @@ render_target_update_mode = 4
 [node name="Node3D" type="Node3D" parent="SubViewportContainer/SubViewport"]
 
 [node name="MatavimoIndas" parent="SubViewportContainer/SubViewport/Node3D" groups=["pickable"] instance=ExtResource("2_4ek20")]
+transform = Transform3D(1, 0, 0, 0, 0.994522, 0.104528, 0, -0.104528, 0.994522, 0.655, 0, 0)
+
+[node name="LiquidMesh" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Node3D/MatavimoIndas"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.385, -5.83, 0)
+size = Vector3(1.7, 0.1, 1)
 
 [node name="polaroidas" parent="SubViewportContainer/SubViewport/Node3D" groups=["pickable"] instance=ExtResource("3_ht225")]
+transform = Transform3D(-0.984196, 0, 0.177085, 0, 1, 0, -0.177085, 0, -0.984196, -9.82, 0, 0)
 gravity_scale = 0.0
 
 [node name="RyskinimoIndas" parent="SubViewportContainer/SubViewport/Node3D" groups=["pickable"] instance=ExtResource("4_xxe2i")]
+transform = Transform3D(1, 0, 0, 0, 0.996195, 0.0871557, 0, -0.0871557, 0.996195, -6.02, -0.31, 0)
 gravity_scale = 0.0
+
+[node name="LiquidMesh" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Node3D/RyskinimoIndas"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.58, -5.605, 0)
+size = Vector3(1.3, 0.1, 1)
 
 [node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport/Node3D"]
 transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0, -5)
@@ -57,4 +68,14 @@ size = 15.0
 far = 1000.0
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport/Node3D"]
-transform = Transform3D(0.707107, 0.5, 0.5, 0, 0.707107, -0.707107, -0.707107, 0.5, 0.5, 0, 0, 0)
+transform = Transform3D(-0.663926, -0.528773, -0.528773, 0, 0.707107, -0.707107, 0.747798, -0.469467, -0.469467, 0, 0.477736, 0)
+light_energy = 1.5
+light_specular = 3.11
+
+[node name="DevelopProgressBar" type="ProgressBar" parent="."]
+layout_mode = 0
+offset_left = 29.0
+offset_top = 23.0
+offset_right = 376.0
+offset_bottom = 98.0
+max_value = 2.0

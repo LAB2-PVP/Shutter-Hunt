@@ -9,6 +9,7 @@ points = PackedVector3Array(-4.76856, 2.26001, 0, -4.74567, 2.26001, 0.232639, -
 
 [node name="ApaciaKanistras" parent="." index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6, 0)
+transparency = 0.6
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6, 0)
