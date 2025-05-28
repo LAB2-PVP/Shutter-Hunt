@@ -4,11 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://d1suphh58soy"
-valid=false
+path="res://.godot/imported/meska.blend-98a0777ce8c8323cd4a9a37574b46241.scn"
 
 [deps]
 
 source_file="res://Modeliai (Blender failai)/AnimalModels/meska.blend"
+dest_files=["res://.godot/imported/meska.blend-98a0777ce8c8323cd4a9a37574b46241.scn"]
 
 [params]
 

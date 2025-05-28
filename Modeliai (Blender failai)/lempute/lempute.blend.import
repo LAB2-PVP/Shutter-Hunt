@@ -4,11 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://cy1788720p02"
-valid=false
+path="res://.godot/imported/lempute.blend-6e48fb430080d7ed93cb032ba145d811.scn"
 
 [deps]
 
 source_file="res://Modeliai (Blender failai)/lempute/lempute.blend"
+dest_files=["res://.godot/imported/lempute.blend-6e48fb430080d7ed93cb032ba145d811.scn"]
 
 [params]
 
