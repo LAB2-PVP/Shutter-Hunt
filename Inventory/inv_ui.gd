@@ -19,10 +19,14 @@ func _process(delta):
 func open():
 	self.visible = true
 	is_open = true
+	GlobalScene.inventory_open = true
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if is_open else Input.MOUSE_MODE_CAPTURED
 
 func close():
 	self.visible = false
 	is_open = false
+	GlobalScene.inventory_open = false
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if is_open else Input.MOUSE_MODE_CAPTURED
 
 func update_slots():
 	for i in range(slots.size()):

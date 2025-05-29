@@ -18,11 +18,13 @@ func _process(delta):
 func open():
 	self.visible = true
 	is_paused = true
+	GlobalScene.menu_open = true
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if is_paused else Input.MOUSE_MODE_CAPTURED
 
 func close():
 	visible = false
 	is_paused = false
+	GlobalScene.menu_open = false
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if is_paused else Input.MOUSE_MODE_CAPTURED
 	
 

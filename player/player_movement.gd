@@ -113,6 +113,15 @@ func _physics_process(delta: float) -> void:
 	GlobalScene.debug.add_property("MovementSpeed", _speed, 2)
 	GlobalScene.debug.add_property("hasCamera", hasCamera, 2)
 	
+	if GlobalScene.inventory_open:
+		return
+	
+	if GlobalScene.menu_open:
+		return
+		
+	if GlobalScene.quest_open:
+		return
+	
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	else:

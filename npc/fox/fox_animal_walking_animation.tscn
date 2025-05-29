@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=3 uid="uid://p0lk1qml2f4s"]
+
+[ext_resource type="PackedScene" uid="uid://c8wkbh7kdfug5" path="res://Animation/Fox_Animal_WalkingAnimation.glb" id="1_62ud1"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_62ud1"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1glmt"]
+animation = &"Walking"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_65wdx"]
+advance_mode = 0
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yqhla"]
+advance_mode = 0
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_cg5c7"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_wi8q6"]
+states/BlendTree/node = SubResource("AnimationNodeBlendTree_62ud1")
+states/BlendTree/position = Vector2(431, 163)
+states/Walking/node = SubResource("AnimationNodeAnimation_1glmt")
+states/Walking/position = Vector2(538, 100)
+transitions = ["BlendTree", "Walking", SubResource("AnimationNodeStateMachineTransition_65wdx"), "Walking", "BlendTree", SubResource("AnimationNodeStateMachineTransition_yqhla"), "Start", "BlendTree", SubResource("AnimationNodeStateMachineTransition_cg5c7")]
+
+[node name="Fox" instance=ExtResource("1_62ud1")]
+
+[node name="Skeleton3D" parent="FoxArm" index="0"]
+bones/3/rotation = Quaternion(-0.162013, -0.00822796, 0.0134956, 0.986662)
+bones/4/rotation = Quaternion(0.0108521, 0.00648164, -0.379478, 0.925115)
+bones/5/rotation = Quaternion(0.100534, -0.0389137, 0.356168, 0.928182)
+bones/6/rotation = Quaternion(0.658494, 0.0307047, -0.0133686, 0.751841)
+bones/7/rotation = Quaternion(-0.133085, -0.0150336, -0.00379826, 0.990983)
+bones/8/rotation = Quaternion(0.767712, 0.0156, -0.0482414, 0.638786)
+bones/9/rotation = Quaternion(0.355698, 0.0341876, 4.85601e-05, 0.933975)
+bones/10/rotation = Quaternion(0.824536, -0.00617933, 0.0270242, 0.56513)
+bones/11/rotation = Quaternion(0.0979379, -4.70686e-05, -0.00600739, 0.995174)
+bones/12/rotation = Quaternion(0.773453, -0.0178918, -0.0202297, 0.633278)
+bones/13/rotation = Quaternion(-0.182402, -0.00163571, 4.6318e-06, 0.983223)
+bones/16/rotation = Quaternion(0.169368, -1.72568e-23, -3.76073e-17, 0.985553)
+
+[node name="AnimationPlayer" parent="." index="1"]
+speed_scale = 1.151
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="2"]
+tree_root = SubResource("AnimationNodeStateMachine_wi8q6")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="NavAgent" type="NavigationAgent3D" parent="." index="3"]

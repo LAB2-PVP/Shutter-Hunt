@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://52k4t820p52r"]
+
+[ext_resource type="Script" uid="uid://dnb538jusce8q" path="res://tutorial_screen.gd" id="1_8e1o1"]
+[ext_resource type="Texture2D" uid="uid://bx6exfmsdv28c" path="res://Mygtukai/tutorial_ui.png" id="2_m5rub"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8e1o1"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m5rub"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xfdpv"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[node name="TutorialScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8e1o1")
+
+[node name="TutorialUi" type="Sprite2D" parent="."]
+position = Vector2(585.25, 343)
+scale = Vector2(0.603592, 0.606327)
+texture = ExtResource("2_m5rub")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_top = -8.0
+offset_right = 1167.0
+offset_bottom = 655.0
+theme_override_styles/focus = SubResource("StyleBoxFlat_8e1o1")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_8e1o1")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_8e1o1")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_8e1o1")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_8e1o1")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_8e1o1")
+theme_override_styles/hover = SubResource("StyleBoxFlat_8e1o1")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_8e1o1")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_8e1o1")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_m5rub")
+theme_override_styles/normal = SubResource("StyleBoxFlat_xfdpv")

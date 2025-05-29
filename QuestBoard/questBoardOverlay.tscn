@@ -70,6 +70,7 @@ offset_bottom = 355.0
 theme_override_styles/panel = SubResource("StyleBoxTexture_pdbv1")
 
 [node name="TitleLabel" type="Label" parent="Panel3"]
+layout_mode = 0
 offset_left = 19.0
 offset_top = 45.0
 offset_right = 394.0
