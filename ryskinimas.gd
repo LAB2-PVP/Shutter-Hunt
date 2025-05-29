@@ -17,6 +17,10 @@ var rysk_liquid_mesh: CSGBox3D  # Reference to liquid mesh in RyskinimoIndas
 var matav_liquid_mesh: CSGBox3D  # Reference to liquid mesh in MatavimoIndas
 var wet_material: StandardMaterial3D  # Material for wet photo effect
 var progress_bar: ProgressBar  # Reference to the development progress bar
+var matavimo_indas: RigidBody3D  # Reference to MatavimoIndas node
+var rotation_angle: float = 0.0  # Track rotation angle for RyskinimoIndas
+var matav_rotation_angle: float = 0.0  # Track rotation angle for MatavimoIndas
+var is_matav_processed: bool = false  # Track if MatavimoIndas has been filled and emptied
 
 # Path to the user's photo folder (adjust as needed)
 var photo_folder_path: String = OS.get_environment("user://screenshots")  # Default to user's Pictures folder
@@ -28,6 +32,7 @@ func _ready():
 	rysk_liquid_mesh = $SubViewportContainer/SubViewport/Node3D/RyskinimoIndas/LiquidMesh
 	matav_liquid_mesh = $SubViewportContainer/SubViewport/Node3D/MatavimoIndas/LiquidMesh
 	progress_bar = $DevelopProgressBar
+	matavimo_indas = $SubViewportContainer/SubViewport/Node3D/MatavimoIndas  # Get reference to MatavimoIndas
 
 	# Initialize progress bar
 	progress_bar.min_value = 0
@@ -90,11 +95,25 @@ func _physics_process(delta):
 		var ray_end = ray_origin + ray_normal * 1000
 		var intersection = plane.intersects_ray(ray_origin, ray_end)
 		if intersection:
-			# Constrain to XY plane and keep original rotation
+			# Use static offset calculated at pickup
 			var new_position = intersection + mouse_offset
 			new_position.z = original_position.z  # Keep z constant for 2D movement
+			# Apply local rotation around Z-axis without affecting position
+			if held_object.name == "RyskinimoIndas":
+				held_object.rotation = original_rotation
+				held_object.rotate_z(deg_to_rad(rotation_angle))
+				if rotation_angle != 0:
+					new_position.x -= 8.0
+					new_position.y -= 1.0  # Add offset on the Y-axis when rotated
+			elif held_object.name == "MatavimoIndas":
+				held_object.rotation = original_rotation
+				held_object.rotate_z(deg_to_rad(matav_rotation_angle))
+				if matav_rotation_angle != 0:
+					new_position.x += 2
+					new_position.y -= 12  # Add offset on the Y-axis when rotated
+			else:
+				held_object.rotation = original_rotation
 			held_object.global_transform.origin = new_position
-			held_object.rotation = original_rotation  # Prevent rotation while dragging
 			held_object.linear_velocity = Vector3.ZERO
 			held_object.angular_velocity = Vector3.ZERO
 	else:
@@ -103,10 +122,9 @@ func _physics_process(delta):
 			if node is RigidBody3D and node != held_object:
 				var current_position = node.global_transform.origin
 				var original_pos = origins[node]
-				# If the object has moved from its original position, snap it back
 				if current_position.distance_to(original_pos) > 0.01:  # Small threshold to avoid jitter
 					node.global_transform.origin = original_pos
-					node.linear_velocity = Vector3.ZERO  # Stop any movement
+					node.linear_velocity = Vector3.ZERO
 					node.angular_velocity = Vector3.ZERO
 		# Reset velocities for non-held objects to minimize physics movement
 		for node in get_tree().get_nodes_in_group("pickable"):
@@ -119,16 +137,31 @@ func _physics_process(delta):
 			progress_bar.value = develop_timer  # Update progress bar
 			if develop_timer <= 0:
 				finish_developing()
-	# Handle liquid interactions (e.g., add liquid with 'E' key)
-	if Input.is_action_just_pressed("ui_accept"):  # Use 'Enter' key to add liquid
-		if held_object and held_object.name == "RyskinimoIndas" and liquid_in_rysk < 1.0:
-			liquid_in_rysk += 0.5  # Add 0.5 units of liquid
-			print("Added liquid to RyskinimoIndas. Level: ", liquid_in_rysk)
-		elif held_object and held_object.name == "MatavimoIndas" and liquid_in_matav < 1.0 and liquid_in_rysk > 0.0:
-			var transfer_amount = min(0.5, liquid_in_rysk)  # Transfer up to 0.5 or available liquid
-			liquid_in_rysk -= transfer_amount
-			liquid_in_matav += transfer_amount
-			print("Transferred liquid to MatavimoIndas. RyskinimoIndas: ", liquid_in_rysk, " MatavimoIndas: ", liquid_in_matav)
+
+	# Handle liquid interactions (e.g., add liquid with 'Enter' key)
+	if Input.is_action_just_pressed("ui_accept"):
+		if held_object and held_object.name == "RyskinimoIndas":
+			if rotation_angle == 0 and liquid_in_rysk < 1.0:
+				liquid_in_rysk += 0.5
+				print("Added liquid to RyskinimoIndas. Level: ", liquid_in_rysk)
+			elif rotation_angle != 0 and liquid_in_rysk > 0.0:
+				var transfer_amount = liquid_in_rysk
+				liquid_in_rysk -= transfer_amount
+				liquid_in_matav += transfer_amount
+				print("Transferred all liquid to MatavimoIndas. RyskinimoIndas: ", liquid_in_rysk, " MatavimoIndas: ", liquid_in_matav)
+				print("Rotation angle before reset: ", rotation_angle)
+				held_object.rotation = original_rotation
+				rotation_angle = 0
+				print("Rotation angle after reset: ", rotation_angle, " Object rotation: ", held_object.rotation)
+		elif held_object and held_object.name == "MatavimoIndas":
+			if matav_rotation_angle != 0 and liquid_in_matav > 0.0:
+				liquid_in_matav = 0.0
+				is_matav_processed = true  # Mark MatavimoIndas as processed
+				print("Dropped all liquid from MatavimoIndas. MatavimoIndas: ", liquid_in_matav)
+				print("Matav rotation angle before reset: ", matav_rotation_angle)
+				held_object.rotation = original_rotation
+				matav_rotation_angle = 0
+				print("Matav rotation angle after reset: ", matav_rotation_angle, " Object rotation: ", held_object.rotation)
 
 func _input(event):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
@@ -140,56 +173,76 @@ func _input(event):
 			var space_state = null
 			if sub_viewport.world_3d:
 				space_state = sub_viewport.world_3d.direct_space_state
+				print("Space state retrieved: ", space_state != null)
 			else:
+				print("SubViewport world_3d is null!")
 				return
 			var query = PhysicsRayQueryParameters3D.create(ray_origin, ray_end)
 			query.collision_mask = 0xFFFFFFFF
 			var result = space_state.intersect_ray(query)
-			if result and result.collider.is_in_group("pickable"):
-				held_object = result.collider as RigidBody3D
-				original_position = origins[held_object]  # Use original position from origins
-				original_rotation = held_object.rotation  # Store current rotation
-				plane = Plane(Vector3(0, 0, 1), held_object.global_position.z)
-				var pickup_intersection = plane.intersects_ray(ray_origin, ray_end)
-				if pickup_intersection:
-					mouse_offset = held_object.global_position - pickup_intersection
-				held_object.freeze = true
-				held_object.freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
-				# Lock rotation while dragging
-				held_object.lock_rotation = true
-				held_object.angular_velocity = Vector3.ZERO
-				held_object.linear_velocity = Vector3.ZERO
-				# Check for dipping action
-				if held_object.name == "polaroidas" and liquid_in_matav > 0.0 and not is_developing:
-					start_developing()
+			if result:
+				print("Raycast hit: ", result.collider.name)
+				if result.collider.is_in_group("pickable"):
+					held_object = result.collider as RigidBody3D
+					print("Picked up object: ", held_object.name)
+					original_position = origins[held_object]
+					original_rotation = held_object.rotation
+					plane = Plane(Vector3(0, 0, 1), held_object.global_position.z)
+					var pickup_intersection = plane.intersects_ray(ray_origin, ray_end)
+					if pickup_intersection:
+						mouse_offset = held_object.global_transform.origin - pickup_intersection
+						print("Mouse offset: ", mouse_offset)
+					held_object.freeze = true
+					held_object.freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
+					held_object.lock_rotation = true
+					held_object.angular_velocity = Vector3.ZERO
+					held_object.linear_velocity = Vector3.ZERO
+					# Check for dipping action only if MatavimoIndas has been processed
+					if held_object.name == "polaroidas" and is_matav_processed:
+						start_developing()
+			else:
+				print("Raycast missed!")
 		else:
 			if held_object:
 				held_object.set_deferred("position", original_position)
-				held_object.global_transform.origin = original_position  # Return to original position
-				held_object.rotation = original_rotation  # Restore original rotation
+				held_object.global_transform.origin = original_position
+				held_object.rotation = original_rotation
 				for node in get_tree().get_nodes_in_group("pickable"):
 					if node is RigidBody3D:
 						print(origins[node])
-				held_object.freeze = false  # Allow physics for collisions but control velocity
-				# Ensure no physics movement after release
+				held_object.freeze = false
 				held_object.lock_rotation = true
 				held_object.angular_velocity = Vector3.ZERO
 				held_object.linear_velocity = Vector3.ZERO
-				# Now set held_object to null
+				rotation_angle = 0
+				matav_rotation_angle = 0
 				held_object = null
-				mouse_offset = Vector3.ZERO  # Reset offset
-				plane = Plane()  # Reset the plane
+				mouse_offset = Vector3.ZERO
+				plane = Plane()
+	# Handle scroll wheel for rotation
+	elif event is InputEventMouseButton and (event.button_index == MOUSE_BUTTON_WHEEL_UP or event.button_index == MOUSE_BUTTON_WHEEL_DOWN):
+		if held_object and held_object.name == "RyskinimoIndas":
+			if event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+				rotation_angle += 45
+			elif event.button_index == MOUSE_BUTTON_WHEEL_UP:
+				rotation_angle -= 45
+			rotation_angle = clamp(rotation_angle, 0, 180)
+		elif held_object and held_object.name == "MatavimoIndas":
+			if event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+				matav_rotation_angle += 45
+			elif event.button_index == MOUSE_BUTTON_WHEEL_UP:
+				matav_rotation_angle -= 45
+			matav_rotation_angle = clamp(matav_rotation_angle, 0, 180)
 
 func start_developing():
-	if held_object and held_object.name == "polaroidas" and liquid_in_matav > 0.0:
+	if held_object and held_object.name == "polaroidas" and is_matav_processed:
 		developing_photo = held_object
 		is_developing = true
-		develop_timer = 2.0  # Set drying time to 2 seconds
-		liquid_in_matav -= 0.1  # Consume some liquid
+		develop_timer = 2.0
 		print("Photo developing started. Time left: ", develop_timer)
 		var mesh_instance = developing_photo.get_node_or_null("MeshInstance3D")
 		if mesh_instance:
-			mesh_instance.material_override = wet_material  # Apply wet material
+			mesh_instance.material_override = wet_material
 		progress_bar.visible = true
 		progress_bar.value = develop_timer
 
@@ -197,15 +250,13 @@ func finish_developing():
 	if developing_photo:
 		var mesh_instance = developing_photo.get_node_or_null("MeshInstance3D")
 		if mesh_instance and mesh_instance.material_override:
-			# Load the last photo from the user's folder
 			var last_photo_texture = load_last_photo()
 			if last_photo_texture:
 				mesh_instance.material_override.albedo_texture = last_photo_texture
 				mesh_instance.material_override.albedo_color = Color.WHITE
 			else:
-				# Fallback if no photo is found
 				mesh_instance.material_override.albedo_color = Color.BLACK
-			mesh_instance.material_override.roughness = 1.0  # Dry look
+			mesh_instance.material_override.roughness = 1.0
 			mesh_instance.material_override.metallic = 0.0
 		developing_photo = null
 		is_developing = false
@@ -218,7 +269,7 @@ func load_last_photo() -> Texture2D:
 	if dir:
 		var latest_file: String = ""
 		var latest_time: int = 0
-		var image_extensions = [".png", ".jpg", ".jpeg"]  # Supported image extensions
+		var image_extensions = [".png", ".jpg", ".jpeg"]
 
 		dir.list_dir_begin()
 		var file_name = dir.get_next()
@@ -246,4 +297,4 @@ func load_last_photo() -> Texture2D:
 			print("No image files found in folder: ", photo_folder_path)
 	else:
 		print("Cannot open directory: ", photo_folder_path)
-	return null  # Return null if no photo is found
+	return null

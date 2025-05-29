@@ -4,12 +4,11 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://bn5wkhm1jyblw"
-path="res://.godot/imported/skelbimulenta.blend-f201ec52f11ebf4b60d2df974b3fdcb4.scn"
+valid=false
 
 [deps]
 
 source_file="res://Modeliai (Blender failai)/SkelbimuLenta/skelbimulenta.blend"
-dest_files=["res://.godot/imported/skelbimulenta.blend-f201ec52f11ebf4b60d2df974b3fdcb4.scn"]
 
 [params]
 

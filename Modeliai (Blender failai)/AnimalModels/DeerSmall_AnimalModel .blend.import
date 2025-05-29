@@ -4,12 +4,11 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://0abxx4ryk482"
-path="res://.godot/imported/DeerSmall_AnimalModel .blend-c852ff517a3b460f08350457b93050dc.scn"
+valid=false
 
 [deps]
 
 source_file="res://Modeliai (Blender failai)/AnimalModels/DeerSmall_AnimalModel .blend"
-dest_files=["res://.godot/imported/DeerSmall_AnimalModel .blend-c852ff517a3b460f08350457b93050dc.scn"]
 
 [params]
 
