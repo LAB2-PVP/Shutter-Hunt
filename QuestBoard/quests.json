@@ -1,14 +1,26 @@
 [
   {
-	"title": "Find the Lost Cat"
+	"title": "Take photo of a bear"
   },
   {
-	"title": "Deliver a Letter"
+	"title": "Take photo of a deer"
   },
   {
-	"title": "Clear Rats"
+	"title": "Develope 1 photo"
   },
   {
-	"title": "Gather Herbs"
+	"title": "Pick up a camera"
+  },
+  {
+	"title": "Take 5 photos"
+  },
+  {
+	"title": "Use developing station"
+  },
+  {
+	"title": "Take photo of a tree"
+  },
+  {
+	"title": "Take picture of a rabbit"
   }
 ]

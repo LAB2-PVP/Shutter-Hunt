@@ -19,10 +19,14 @@ func _process(delta):
 func open():
 	self.visible = true
 	is_open = true
+	GlobalScene.inventory_open = true
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if is_open else Input.MOUSE_MODE_CAPTURED
 
 func close():
 	self.visible = false
 	is_open = false
+	GlobalScene.inventory_open = false
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if is_open else Input.MOUSE_MODE_CAPTURED
 
 func update_slots():
 	for i in range(slots.size()):
@@ -40,14 +44,14 @@ func load_items():
 	dir.list_dir_begin()
 	while true:
 		var item = dir.get_next()
-		if item == "": # our screenshot
+		if item == "":
 			break
 		if item.ends_with(".png") and not dir.current_is_dir():
 			var path = folder + "/" + item
-			var image = Image.new() # screenshot image
+			var image = Image.new() 
 			if image.load(path) == OK:
 				var tex = ImageTexture.create_from_image(image)
-				var photo = InvItem.new() # ingame item
+				var photo = InvItem.new() 
 				photo.name = item.get_file()
 				photo.icon = tex
 				inv.items.append(photo)

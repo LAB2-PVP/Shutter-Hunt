@@ -6,6 +6,8 @@ extends RayCast3D
 @onready var photoCamera = preload("res://interaction/camera.tscn")
 @onready var heldCamera = preload("res://interaction/camera_hd.tscn")
 
+var is_quest_open = false
+
 var cameraToDrop
 var cameraToSpawn
 
@@ -20,7 +22,8 @@ func _physics_process(_delta):
 		
 		var collider = get_collider()
 		
-		if collider is Interactable:
+		
+		if collider is Interactable and collider.name == "Camera":
 			prompt.text = collider.title_message
 			prompt2.text = collider.action_message
 			
@@ -41,4 +44,29 @@ func _physics_process(_delta):
 					cameraToSpawn.rotation = hand.rotation
 					emit_signal("camera_updated", cameraToSpawn)
 					GlobalScene.player.hasCamera = true
-					
+		
+		elif collider is Interactable and collider.name == "Ryskinimas":
+			prompt.text = collider.title_message
+			prompt2.text = collider.action_message
+			
+			if Input.is_action_just_pressed("interact"):
+				get_tree().change_scene_to_file("res://ryskinimas.tscn")
+		
+		elif collider is Interactable and collider.name == "QuestBoard":
+			var quest_board_ui = get_tree().get_current_scene().get_node("QuestMenu")
+			prompt.text = collider.title_message
+			prompt2.text = collider.action_message
+				
+			if Input.is_action_just_pressed("interact") and not is_quest_open:
+				GlobalScene.quest_open = true
+				quest_board_ui.visible = true
+				quest_board_ui.call("showQuests")
+				is_quest_open = true
+				Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
+			elif Input.is_action_just_pressed("interact") and is_quest_open:
+				GlobalScene.quest_open = false
+				quest_board_ui.visible = false
+				quest_board_ui.call("hideQuests")
+				is_quest_open = false
+				Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)

@@ -1,0 +1,113 @@
+[gd_scene load_steps=11 format=3 uid="uid://4xfw13jid6n6"]
+
+[ext_resource type="Script" uid="uid://drlexut1v7ic7" path="res://QuestBoard/Quests.gd" id="1_vgfma"]
+[ext_resource type="Texture2D" uid="uid://csvdnixmidmly" path="res://TaskUIBoard/assets/boardDarkerBackground.png" id="2_x1nvg"]
+[ext_resource type="Texture2D" uid="uid://c85dpjied3fwn" path="res://TaskUIBoard/assets/task1.png" id="3_i80dy"]
+[ext_resource type="FontFile" uid="uid://cmu8egafu0lcn" path="res://QuestBoard/A DAY WITHOUT SUN.otf" id="4_o1rl7"]
+[ext_resource type="Texture2D" uid="uid://eg227ou6at2i" path="res://TaskUIBoard/assets/task3.png" id="5_5i5qo"]
+[ext_resource type="Texture2D" uid="uid://x25e3xlini0y" path="res://TaskUIBoard/assets/task4.png" id="6_uoxfo"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bqubp"]
+texture = ExtResource("2_x1nvg")
+region_rect = Rect2(248, 87, 1424, 906)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fau0s"]
+texture = ExtResource("3_i80dy")
+region_rect = Rect2(105, 102, 685, 505)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wlua2"]
+texture = ExtResource("5_5i5qo")
+region_rect = Rect2(156, 111, 634, 447)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3syfe"]
+texture = ExtResource("6_uoxfo")
+region_rect = Rect2(146, 137, 670, 460)
+
+[node name="quests" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vgfma")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -491.0
+offset_top = -276.0
+offset_right = 473.0
+offset_bottom = 265.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxTexture_bqubp")
+
+[node name="Panel2" type="Panel" parent="."]
+offset_left = 627.0
+offset_top = 73.0
+offset_right = 1013.0
+offset_bottom = 321.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_fau0s")
+
+[node name="TitleLabel" type="Label" parent="Panel2"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 42.0
+offset_right = 357.0
+offset_bottom = 243.0
+rotation = -0.13439
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("4_o1rl7")
+theme_override_font_sizes/font_size = 50
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel3" type="Panel" parent="."]
+offset_left = 141.0
+offset_top = 103.0
+offset_right = 557.0
+offset_bottom = 355.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_wlua2")
+
+[node name="TitleLabel" type="Label" parent="Panel3"]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 45.0
+offset_right = 394.0
+offset_bottom = 219.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("4_o1rl7")
+theme_override_font_sizes/font_size = 50
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel4" type="Panel" parent="."]
+offset_left = 575.0
+offset_top = 329.0
+offset_right = 973.0
+offset_bottom = 563.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_3syfe")
+
+[node name="TitleLabel" type="Label" parent="Panel4"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.049
+anchor_bottom = 0.049
+offset_left = 11.0
+offset_top = 21.534
+offset_right = 389.0
+offset_bottom = 211.534
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("4_o1rl7")
+theme_override_font_sizes/font_size = 50
+horizontal_alignment = 1
+vertical_alignment = 1
