@@ -6,14 +6,21 @@ extends RayCast3D
 @onready var photoCamera = preload("res://interaction/camera.tscn")
 @onready var heldCamera = preload("res://interaction/camera_hd.tscn")
 
+@onready var development: Control = $"../../UI/Ryskinimas"
+
 var is_quest_open = false
+var is_development_open = false
 
 var cameraToDrop
 var cameraToSpawn
 
 signal camera_updated(new_camera)
 
+func _ready():
+	development.visible = false
+
 func _physics_process(_delta):
+	
 	
 	prompt.text = ""
 	prompt2.text = ""
@@ -49,8 +56,19 @@ func _physics_process(_delta):
 			prompt.text = collider.title_message
 			prompt2.text = collider.action_message
 			
-			if Input.is_action_just_pressed("interact"):
-				get_tree().change_scene_to_file("res://ryskinimas.tscn")
+			if Input.is_action_just_pressed("interact") and not is_development_open:
+				
+				development.visible = true
+				GlobalScene.development_open = true
+				is_development_open = true
+				Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+				
+			elif Input.is_action_just_pressed("interact") and is_development_open:
+				
+				development.visible = false
+				GlobalScene.development_open = false
+				is_development_open = false
+				Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		
 		elif collider is Interactable and collider.name == "QuestBoard":
 			var quest_board_ui = get_tree().get_current_scene().get_node("QuestMenu")
