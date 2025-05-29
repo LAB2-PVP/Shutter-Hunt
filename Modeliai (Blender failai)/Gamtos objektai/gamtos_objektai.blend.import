@@ -4,11 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://cspsabd1wrknh"
-valid=false
+path="res://.godot/imported/gamtos_objektai.blend-6b23eccf32c547677a9c421a59540e99.scn"
 
 [deps]
 
 source_file="res://Modeliai (Blender failai)/Gamtos objektai/gamtos_objektai.blend"
+dest_files=["res://.godot/imported/gamtos_objektai.blend-6b23eccf32c547677a9c421a59540e99.scn"]
 
 [params]
 

@@ -4,11 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://c2lokqmfxefmi"
-valid=false
+path="res://.godot/imported/Laikrodis.blend-e17174c192f6fbecdd5f07ea1c01c663.scn"
 
 [deps]
 
 source_file="res://Modeliai (Blender failai)/Laikrodis/Laikrodis.blend"
+dest_files=["res://.godot/imported/Laikrodis.blend-e17174c192f6fbecdd5f07ea1c01c663.scn"]
 
 [params]
 
