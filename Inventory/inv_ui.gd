@@ -44,14 +44,14 @@ func load_items():
 	dir.list_dir_begin()
 	while true:
 		var item = dir.get_next()
-		if item == "": # our screenshot
+		if item == "":
 			break
 		if item.ends_with(".png") and not dir.current_is_dir():
 			var path = folder + "/" + item
-			var image = Image.new() # screenshot image
+			var image = Image.new() 
 			if image.load(path) == OK:
 				var tex = ImageTexture.create_from_image(image)
-				var photo = InvItem.new() # ingame item
+				var photo = InvItem.new() 
 				photo.name = item.get_file()
 				photo.icon = tex
 				inv.items.append(photo)
