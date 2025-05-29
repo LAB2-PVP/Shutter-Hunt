@@ -4,12 +4,11 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://lrhlkt2fxyih"
-path="res://.godot/imported/Buteliukai.blend-b0142412aafe6a6f4f1506192f78ffe6.scn"
+valid=false
 
 [deps]
 
 source_file="res://Modeliai (Blender failai)/Buteliukai/Buteliukai.blend"
-dest_files=["res://.godot/imported/Buteliukai.blend-b0142412aafe6a6f4f1506192f78ffe6.scn"]
 
 [params]
 
