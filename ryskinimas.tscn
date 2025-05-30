@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://d0inuhvncf8q3"]
+[gd_scene load_steps=8 format=3 uid="uid://d0inuhvncf8q3"]
 
 [ext_resource type="Script" uid="uid://dstwni6pom2s4" path="res://ryskinimas.gd" id="1_a0xin"]
 [ext_resource type="PackedScene" uid="uid://oeq3jbxgoh82" path="res://Modeliai (Blender failai)/RyskinimasBlenderObjektai/matavimo_indas.tscn" id="2_4ek20"]
 [ext_resource type="Texture2D" uid="uid://cgbketraoqi8d" path="res://Modeliai (Blender failai)/RyskinimasBlenderObjektai/Ryskinimui.jpg" id="2_xxe2i"]
 [ext_resource type="PackedScene" uid="uid://1hei2646j40b" path="res://Modeliai (Blender failai)/RyskinimasBlenderObjektai/polaroidas.tscn" id="3_ht225"]
 [ext_resource type="PackedScene" uid="uid://ybxjsehtgu7c" path="res://Modeliai (Blender failai)/RyskinimasBlenderObjektai/ryskinimo_indas.tscn" id="4_xxe2i"]
+[ext_resource type="PackedScene" uid="uid://b46h33v7nc1ob" path="res://Modeliai (Blender failai)/RyskinimasBlenderObjektai/new_container.tscn" id="6_11vrl"]
 
 [sub_resource type="World3D" id="World3D_xxe2i"]
 
@@ -52,6 +53,13 @@ size = Vector3(1.7, 0.1, 1)
 [node name="polaroidas" parent="SubViewportContainer/SubViewport/Node3D" groups=["pickable"] instance=ExtResource("3_ht225")]
 transform = Transform3D(-0.984196, 0, 0.177085, 0, 1, 0, -0.177085, 0, -0.984196, -9.82, 0, 0)
 gravity_scale = 0.0
+
+[node name="newContainer" parent="SubViewportContainer/SubViewport/Node3D" groups=["pickable"] instance=ExtResource("6_11vrl")]
+transform = Transform3D(0.982507, 0.0418225, -0.18147, 0.0165982, 0.950912, 0.309017, 0.185486, -0.306623, 0.933583, 2.5, -6.8, 0)
+
+[node name="LiquidMesh" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Node3D/newContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+size = Vector3(5, 0.5, 4.5)
 
 [node name="RyskinimoIndas" parent="SubViewportContainer/SubViewport/Node3D" groups=["pickable"] instance=ExtResource("4_xxe2i")]
 transform = Transform3D(1, 0, 0, 0, 0.996195, 0.0871557, 0, -0.0871557, 0.996195, -6.02, -0.31, 0)

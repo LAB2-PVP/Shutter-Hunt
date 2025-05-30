@@ -4,12 +4,11 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://0er617l4a1yd"
-path="res://.godot/imported/blekute.blend-7de1a0fa1ed4529ebeb9b238c29d3306.scn"
+valid=false
 
 [deps]
 
 source_file="res://Modeliai (Blender failai)/blekute/blekute.blend"
-dest_files=["res://.godot/imported/blekute.blend-7de1a0fa1ed4529ebeb9b238c29d3306.scn"]
 
 [params]
 

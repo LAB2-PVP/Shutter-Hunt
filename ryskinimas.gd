@@ -10,11 +10,13 @@ var mouse_offset: Vector3 = Vector3.ZERO  # Store offset between mouse and objec
 var origins = {}
 var liquid_in_rysk: float = 0.0  # Liquid level in RyskinimoIndas
 var liquid_in_matav: float = 0.0  # Liquid level in MatavimoIndas
+var liquid_in_new: float = 0.0  # Liquid level in newContainer
 var developing_photo: RigidBody3D = null  # Photo being developed
 var develop_timer: float = 0.0  # Timer for drying process
 var is_developing: bool = false  # Flag to track development state
 var rysk_liquid_mesh: CSGBox3D  # Reference to liquid mesh in RyskinimoIndas
 var matav_liquid_mesh: CSGBox3D  # Reference to liquid mesh in MatavimoIndas
+var new_liquid_mesh: CSGBox3D  # Reference to liquid mesh in newContainer
 var wet_material: StandardMaterial3D  # Material for wet photo effect
 var progress_bar: ProgressBar  # Reference to the development progress bar
 var matavimo_indas: RigidBody3D  # Reference to MatavimoIndas node
@@ -31,6 +33,8 @@ func _ready():
 	plane = Plane(Vector3(0, 0, 1), 0)  # Plane at z=0
 	rysk_liquid_mesh = $SubViewportContainer/SubViewport/Node3D/RyskinimoIndas/LiquidMesh
 	matav_liquid_mesh = $SubViewportContainer/SubViewport/Node3D/MatavimoIndas/LiquidMesh
+	new_liquid_mesh = $SubViewportContainer/SubViewport/Node3D/newContainer/LiquidMesh  # Reference to new container's liquid mesh
+	print("Debug: new_liquid_mesh initialized as: ", new_liquid_mesh)
 	progress_bar = $DevelopProgressBar
 	matavimo_indas = $SubViewportContainer/SubViewport/Node3D/MatavimoIndas  # Get reference to MatavimoIndas
 
@@ -43,8 +47,18 @@ func _ready():
 	# Set up liquid material (blue, semi-transparent)
 	var liquid_material = StandardMaterial3D.new()
 	liquid_material.albedo_color = Color(0, 0.5, 1, 0.7)  # Blue, semi-transparent
-	rysk_liquid_mesh.material = liquid_material
-	matav_liquid_mesh.material = liquid_material
+	if rysk_liquid_mesh:
+		rysk_liquid_mesh.material = liquid_material
+	else:
+		print("Error: RyskinimoIndas/LiquidMesh not found!")
+	if matav_liquid_mesh:
+		matav_liquid_mesh.material = liquid_material
+	else:
+		print("Error: MatavimoIndas/LiquidMesh not found!")
+	if new_liquid_mesh:
+		new_liquid_mesh.material = liquid_material
+	else:
+		print("Error: newContainer/LiquidMesh not found!")
 
 	# Set up wet material for photo during development
 	wet_material = StandardMaterial3D.new()
@@ -66,7 +80,7 @@ func _ready():
 			node.mass = 1000.0  # High mass makes it harder to push
 			node.linear_damp = 10.0  # High damping stops movement quickly
 			# Set up material for photos
-			if node.name in ["polaroidas", "MatavimoIndas", "RyskinimoIndas"]:
+			if node.name in ["polaroidas", "MatavimoIndas", "RyskinimoIndas", "newContainer"]:
 				var mesh_instance = node.get_node_or_null("MeshInstance3D")
 				if mesh_instance and mesh_instance.material_override == null:
 					var material = StandardMaterial3D.new()
@@ -87,6 +101,9 @@ func _physics_process(delta):
 	# Update liquid heights (assuming max height of the container is 1 unit)
 	rysk_liquid_mesh.height = liquid_in_rysk
 	matav_liquid_mesh.height = liquid_in_matav
+	if new_liquid_mesh:
+		new_liquid_mesh.height = liquid_in_new  # Update new container liquid height
+	print("Debug: Current liquid levels - RyskinimoIndas: ", liquid_in_rysk, " MatavimoIndas: ", liquid_in_matav, " NewContainer: ", liquid_in_new)
 
 	if held_object:
 		var mouse_pos = get_viewport().get_mouse_position()
@@ -154,14 +171,22 @@ func _physics_process(delta):
 				rotation_angle = 0
 				print("Rotation angle after reset: ", rotation_angle, " Object rotation: ", held_object.rotation)
 		elif held_object and held_object.name == "MatavimoIndas":
+			print("Debug: MatavimoIndas Enter pressed. Rotation angle: ", matav_rotation_angle, " Liquid in Matav: ", liquid_in_matav, " Liquid in New: ", liquid_in_new)
 			if matav_rotation_angle != 0 and liquid_in_matav > 0.0:
-				liquid_in_matav = 0.0
-				is_matav_processed = true  # Mark MatavimoIndas as processed
-				print("Dropped all liquid from MatavimoIndas. MatavimoIndas: ", liquid_in_matav)
+				var transfer_amount = liquid_in_matav
+				print("Debug: Transfer amount calculated: ", transfer_amount)
+				liquid_in_matav -= transfer_amount
+				liquid_in_new += transfer_amount  # Transfer to newContainer
+				print("Debug: Verified liquid_in_new after transfer: ", liquid_in_new)
+				print("Transferred all liquid to newContainer. MatavimoIndas: ", liquid_in_matav, " newContainer: ", liquid_in_new)
 				print("Matav rotation angle before reset: ", matav_rotation_angle)
 				held_object.rotation = original_rotation
 				matav_rotation_angle = 0
 				print("Matav rotation angle after reset: ", matav_rotation_angle, " Object rotation: ", held_object.rotation)
+				# Mark MatavimoIndas as processed for photo development
+				is_matav_processed = true
+			else:
+				print("Debug: Transfer to newContainer failed. Rotation angle: ", matav_rotation_angle, " Liquid in Matav: ", liquid_in_matav)
 
 func _input(event):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
@@ -227,12 +252,15 @@ func _input(event):
 			elif event.button_index == MOUSE_BUTTON_WHEEL_UP:
 				rotation_angle -= 45
 			rotation_angle = clamp(rotation_angle, 0, 180)
+			print("Debug: RyskinimoIndas rotation angle updated: ", rotation_angle)
 		elif held_object and held_object.name == "MatavimoIndas":
+			print("Debug: MatavimoIndas scroll detected. Current angle: ", matav_rotation_angle)
 			if event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 				matav_rotation_angle += 45
 			elif event.button_index == MOUSE_BUTTON_WHEEL_UP:
 				matav_rotation_angle -= 45
 			matav_rotation_angle = clamp(matav_rotation_angle, 0, 180)
+			print("Debug: MatavimoIndas new angle: ", matav_rotation_angle)
 
 func start_developing():
 	if held_object and held_object.name == "polaroidas" and is_matav_processed:
