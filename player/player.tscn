@@ -219,6 +219,7 @@ script = ExtResource("10_8t03j")
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="PlayerStateMachine/WalkingPlayerState"]
 stream = ExtResource("13_kb6p2")
 volume_db = 25.0
+bus = &"SFX"
 
 [node name="SprintingPlayerState" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("11_2ieo8")
@@ -227,3 +228,4 @@ script = ExtResource("11_2ieo8")
 stream = ExtResource("13_kb6p2")
 volume_db = 25.0
 pitch_scale = 2.0
+bus = &"SFX"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://d0inuhvncf8q3"]
+[gd_scene load_steps=9 format=3 uid="uid://d0inuhvncf8q3"]
 
 [ext_resource type="Script" uid="uid://dstwni6pom2s4" path="res://ryskinimas.gd" id="1_a0xin"]
 [ext_resource type="PackedScene" uid="uid://oeq3jbxgoh82" path="res://Modeliai (Blender failai)/RyskinimasBlenderObjektai/matavimo_indas.tscn" id="2_4ek20"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://1hei2646j40b" path="res://Modeliai (Blender failai)/RyskinimasBlenderObjektai/polaroidas.tscn" id="3_ht225"]
 [ext_resource type="PackedScene" uid="uid://ybxjsehtgu7c" path="res://Modeliai (Blender failai)/RyskinimasBlenderObjektai/ryskinimo_indas.tscn" id="4_xxe2i"]
 [ext_resource type="PackedScene" uid="uid://b46h33v7nc1ob" path="res://Modeliai (Blender failai)/RyskinimasBlenderObjektai/new_container.tscn" id="6_11vrl"]
+[ext_resource type="Texture2D" uid="uid://c2dr0mlkms0po" path="res://Modeliai (Blender failai)/RyskinimasBlenderObjektai/ss_2025-05-30 04-27-06.png" id="7_w2n62"]
 
 [sub_resource type="World3D" id="World3D_xxe2i"]
 
@@ -79,6 +80,15 @@ far = 1000.0
 transform = Transform3D(-0.663926, -0.528773, -0.528773, 0, 0.707107, -0.707107, 0.747798, -0.469467, -0.469467, 0, 0.477736, 0)
 light_energy = 1.5
 light_specular = 3.11
+
+[node name="RYSKINIMUI" type="TextureRect" parent="SubViewportContainer/SubViewport/Node3D"]
+visible = false
+offset_left = 696.0
+offset_top = 330.0
+offset_right = 751.0
+offset_bottom = 383.0
+texture = ExtResource("7_w2n62")
+expand_mode = 1
 
 [node name="DevelopProgressBar" type="ProgressBar" parent="."]
 layout_mode = 0

@@ -24,8 +24,11 @@ var rotation_angle: float = 0.0  # Track rotation angle for RyskinimoIndas
 var matav_rotation_angle: float = 0.0  # Track rotation angle for MatavimoIndas
 var is_matav_processed: bool = false  # Track if MatavimoIndas has been filled and emptied
 
-# Path to the user's photo folder (adjust as needed)
-var photo_folder_path: String = OS.get_environment("user://screenshots")  # Default to user's Pictures folder
+# Photo cycling variables
+var photo_folder_path: String = "user://screenshots/"  # Path to the user's photo folder
+var photo_textures: Array = []  # Store loaded ImageTextures
+var current_photo_index: int = 0  # Track the current photo index
+@onready var RYSKINIMUI: TextureRect = $SubViewportContainer/SubViewport/Node3D/RYSKINIMUI
 
 func _ready():
 	sub_viewport = $SubViewportContainer/SubViewport
@@ -90,12 +93,38 @@ func _ready():
 						material.albedo_color = Color.WHITE
 					mesh_instance.material_override = material
 
-	# Check if the photo folder exists
-	if not DirAccess.dir_exists_absolute(photo_folder_path):
-		print("Photo folder not found at: ", photo_folder_path)
-		# Fallback to a default path or handle error as needed
-		photo_folder_path = "user://screenshots"  # Fallback to Godot's user data directory
+	# Load photos from the folder
+	load_photos()
+
+func load_photos():
+	var dir = DirAccess.open(photo_folder_path)
+	if dir == null:
+		print("Cannot open directory: ", photo_folder_path)
 		DirAccess.make_dir_absolute(photo_folder_path)
+		return
+
+	photo_textures.clear()
+
+	dir.list_dir_begin()
+	while true:
+		var item = dir.get_next()
+		if item == "":
+			break
+		if item.ends_with(".png") and not dir.current_is_dir():
+			var path = photo_folder_path + item
+			var image = Image.new()
+			if image.load(path) == OK:
+				var tex = ImageTexture.create_from_image(image)
+				photo_textures.append(tex)
+				print("Loaded photo: ", path)
+			else:
+				print("Failed to load image: ", path)
+	dir.list_dir_end()
+
+	if photo_textures.is_empty():
+		print("No .png files found in folder: ", photo_folder_path)
+	else:
+		print("Loaded ", photo_textures.size(), " photos")
 
 func _physics_process(delta):
 	# Update liquid heights (assuming max height of the container is 1 unit)
@@ -153,7 +182,9 @@ func _physics_process(delta):
 			develop_timer -= delta
 			progress_bar.value = develop_timer  # Update progress bar
 			if develop_timer <= 0:
+				
 				finish_developing()
+				
 
 	# Handle liquid interactions (e.g., add liquid with 'Enter' key)
 	if Input.is_action_just_pressed("ui_accept"):
@@ -275,54 +306,5 @@ func start_developing():
 		progress_bar.value = develop_timer
 
 func finish_developing():
-	if developing_photo:
-		var mesh_instance = developing_photo.get_node_or_null("MeshInstance3D")
-		if mesh_instance and mesh_instance.material_override:
-			var last_photo_texture = load_last_photo()
-			if last_photo_texture:
-				mesh_instance.material_override.albedo_texture = last_photo_texture
-				mesh_instance.material_override.albedo_color = Color.WHITE
-			else:
-				mesh_instance.material_override.albedo_color = Color.BLACK
-			mesh_instance.material_override.roughness = 1.0
-			mesh_instance.material_override.metallic = 0.0
-		developing_photo = null
-		is_developing = false
-		print("Photo development complete!")
+		RYSKINIMUI.visible = true
 		progress_bar.visible = false
-
-# Function to load the last photo from the user's folder
-func load_last_photo() -> Texture2D:
-	var dir = DirAccess.open(photo_folder_path)
-	if dir:
-		var latest_file: String = ""
-		var latest_time: int = 0
-		var image_extensions = [".png", ".jpg", ".jpeg"]
-
-		dir.list_dir_begin()
-		var file_name = dir.get_next()
-		while file_name != "":
-			if not dir.current_is_dir():
-				var file_path = photo_folder_path + "/" + file_name
-				var file_ext = file_name.get_extension().to_lower()
-				if file_ext in image_extensions:
-					var file_time = FileAccess.get_modified_time(file_path)
-					if file_time > latest_time:
-						latest_time = file_time
-						latest_file = file_path
-			file_name = dir.get_next()
-		dir.list_dir_end()
-
-		if latest_file != "":
-			var image = Image.new()
-			var error = image.load(latest_file)
-			if error == OK:
-				var texture = ImageTexture.create_from_image(image)
-				return texture
-			else:
-				print("Failed to load image: ", latest_file)
-		else:
-			print("No image files found in folder: ", photo_folder_path)
-	else:
-		print("Cannot open directory: ", photo_folder_path)
-	return null
